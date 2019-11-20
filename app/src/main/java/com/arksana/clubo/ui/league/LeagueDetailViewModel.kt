@@ -1,11 +1,11 @@
-package com.arksana.clubo.ui.fragment
+package com.arksana.clubo.ui.league
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
-class PageViewModel : ViewModel() {
+class LeagueDetailViewModel : ViewModel() {
 
     private val _index = MutableLiveData<Int>()
     val text: LiveData<String> = Transformations.map(_index) {

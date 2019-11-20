@@ -1,4 +1,4 @@
-package com.arksana.clubo.ui.fragment
+package com.arksana.clubo.ui.league
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -15,7 +15,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
-        return PlaceholderFragment.newInstance(position + 1)
+        return LeagueDetailFragment.newInstance(position + 1)
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

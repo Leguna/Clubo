@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.arksana.clubo.DetailAnkoActivity
+import com.arksana.clubo.ui.DetailAnkoActivity
 import com.arksana.clubo.R
 import org.jetbrains.anko.*
 

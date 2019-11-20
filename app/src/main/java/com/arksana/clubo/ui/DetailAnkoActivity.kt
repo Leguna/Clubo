@@ -1,4 +1,4 @@
-package com.arksana.clubo
+package com.arksana.clubo.ui
 
 import android.os.Bundle
 import android.view.MenuItem
