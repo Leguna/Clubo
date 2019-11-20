@@ -4,18 +4,18 @@ import android.graphics.Color
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.arksana.clubo.DetailActivity
+import com.arksana.clubo.DetailAnkoActivity
 import com.arksana.clubo.R
 import org.jetbrains.anko.*
 
 
-class DetailUI : AnkoComponent<DetailActivity> {
+class DetailUI : AnkoComponent<DetailAnkoActivity> {
 
     lateinit var image: ImageView
     lateinit var judul: TextView
     lateinit var desc: TextView
 
-    override fun createView(ui: AnkoContext<DetailActivity>) = with(ui) {
+    override fun createView(ui: AnkoContext<DetailAnkoActivity>) = with(ui) {
         scrollView {
 
             verticalLayout {

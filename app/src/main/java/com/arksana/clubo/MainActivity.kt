@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.adapter.LigaAdapter
 import com.arksana.clubo.anko.MainUI
 import com.arksana.clubo.data.Liga
-import org.jetbrains.anko.*
+import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         mainActivity.rv.layoutManager = LinearLayoutManager(this)
         mainActivity.rv.adapter = LigaAdapter(items) {
-            startActivity<DetailActivity>(DetailActivity.EXTRA_LIGA to it)
+            startActivity<DetailAnkoActivity>(DetailAnkoActivity.EXTRA_LIGA to it)
         }
 
     }
