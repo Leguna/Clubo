@@ -1,12 +1,15 @@
 package com.arksana.clubo.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 
 data class Matches(
         @SerializedName("events")
         val events: List<Match>
 )
+
 
 data class Match(
         @SerializedName("dateEvent")
@@ -126,3 +129,4 @@ data class Match(
         @SerializedName("strVideo")
         val strVideo: Any // null
 )
+

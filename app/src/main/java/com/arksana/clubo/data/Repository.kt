@@ -1,26 +1,65 @@
 package com.arksana.clubo.data
 
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.arksana.clubo.utils.RetrofitClientInstance
+import com.arksana.clubo.utils.RetrofitInterface
+import retrofit2.*
 
 
-interface GetDataService {
+class Repository() : ViewModel() {
 
-    @GET("lookupleague")
-    fun detailLeague(@Query("id") id: Int?): Call<League?>?
+    val leagues = MutableLiveData<Leagues>()
 
-    @GET("eventspastleague.php?")
-    fun prevMatch(@Query("id") id: Int?): Call<List<Match?>?>?
+    val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
+    val service = retrofit?.create(RetrofitInterface::class.java)
 
-    @GET("eventsnextleague")
-    fun nextMatch(@Query("id") id: Int?): Call<List<Match?>?>?
+    fun listLeague() {
+        service?.getListLeague()?.enqueue(object : Callback<Leagues> {
+            override fun onResponse(call: Call<Leagues>, response: Response<Leagues>) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    leagues.postValue(data)
+                }
+            }
 
-    @GET("lookupevent")
-    fun detailMatch(@Query("id") id: Int?): Call<Match?>?
+            override fun onFailure(call: Call<Leagues>, error: Throwable) {
+                Log.e("tag", "errornya ${error.message}")
+            }
+        })
+    }
 
-    @GET("searcheventse=%7Bquery%7D")
-    fun search(@Query("e") query: String?): Call<List<Match?>?>?
+    fun detailLeague(id: Int) {
+        service?.getDetailLeague(id)?.enqueue(object : Callback<League?> {
 
+
+            override fun onResponse(call: Call<League?>, response: Response<League?>) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    Log.d("tag", "responsennya ${data}")
+                }
+            }
+
+            override fun onFailure(call: Call<League?>, t: Throwable) {
+                println("Errornya: " + t)
+            }
+        })
+    }
+
+    fun prevMatch() {
+
+    }
+
+    fun nextMatch() {
+
+    }
+
+    fun detailMatch() {
+
+    }
+
+    fun search() {
+
+    }
 }

@@ -6,31 +6,32 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.arksana.clubo.data.Liga
 import org.jetbrains.anko.AnkoContext
 
 import com.arksana.clubo.anko.LigaUI
+import com.arksana.clubo.data.League
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class LigaAdapter(var list: ArrayList<Liga> = arrayListOf(), val listener: (Liga) -> Unit)
-    : RecyclerView.Adapter<LigaAdapter.LigaViewHolder>() {
+class LigaAdapter(var list: List<League> = arrayListOf(), val listener: (League) -> Unit) :
+    RecyclerView.Adapter<LigaAdapter.LeagueViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LigaViewHolder {
-        return LigaViewHolder(LigaUI().createView(AnkoContext.create(parent.context, parent)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder {
+        return LeagueViewHolder(LigaUI().createView(AnkoContext.create(parent.context, parent)))
     }
-    override fun onBindViewHolder(holder: LigaViewHolder, position: Int) {
 
-        val liga = list[position]
+    override fun onBindViewHolder(holder: LeagueViewHolder, position: Int) {
+
+        val league = list[position]
         Glide.with(holder.itemView.context)
-            .load(liga.image)
+            .load(league.strBadge)
             .apply(RequestOptions().override(200, 300))
             .into(holder.ivLogo)
-        holder.tvTitle.text = liga.name
-        holder.tvYear.text = "${liga.desc}"
+        holder.tvTitle.text = league.strLeague
+        holder.tvYear.text = "${league.strDescriptionEN}"
         holder.layout.setOnClickListener{
-            listener(liga)
+            listener(league)
         }
     }
 
@@ -38,7 +39,7 @@ class LigaAdapter(var list: ArrayList<Liga> = arrayListOf(), val listener: (Liga
         return list.size
     }
 
-    inner class LigaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class LeagueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var ivLogo: ImageView
         var tvTitle: TextView
         var tvYear: TextView

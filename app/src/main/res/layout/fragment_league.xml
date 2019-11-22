@@ -10,9 +10,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category"
+        android:paddingStart="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
+        android:paddingEnd="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

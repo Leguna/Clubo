@@ -2,32 +2,41 @@ package com.arksana.clubo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.R
 import com.arksana.clubo.adapter.LigaAdapter
-import com.arksana.clubo.anko.MainUI
-import com.arksana.clubo.data.Liga
-import com.arksana.clubo.ui.league.DetailActivity
-import org.jetbrains.anko.setContentView
+import com.arksana.clubo.data.League
+import com.arksana.clubo.data.Repository
+import kotlinx.android.synthetic.main.activity_leagues.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
-    var items: ArrayList<Liga> = ArrayList()
-    lateinit var mainActivity : MainUI
+    var items: List<League> = ArrayList()
+
+    val repository = Repository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mainActivity = MainUI()
-        mainActivity.setContentView(this)
+        setContentView(R.layout.activity_leagues)
 
         initData()
 
-        mainActivity.rv.layoutManager = LinearLayoutManager(this)
-        mainActivity.rv.adapter = LigaAdapter(items) {
-            startActivity<DetailActivity>(DetailActivity.EXTRA_LEAGUE to it)
-        }
+        rv_category.layoutManager = LinearLayoutManager(this)
+
+        repository.leagues.observe(this, Observer {
+            items = it.leagues
+            rv_category.adapter = LigaAdapter(items) {
+                println(it.strLeague)
+                startActivity<DetailActivity>(DetailActivity.EXTRA_LEAGUE to it)
+            }
+        })
+
+//        mainActivity.rv.layoutManager = LinearLayoutManager(this)
+//        mainActivity.rv.adapter = LigaAdapter(items) {
+//            startActivity<DetailActivity>(DetailActivity.EXTRA_LEAGUE to it)
+//        }
 
     }
 
@@ -36,17 +45,9 @@ class MainActivity : AppCompatActivity() {
         val name = resources.getStringArray(R.array.liga_name)
         val id = resources.getIntArray(R.array.liga_id)
         val desc = resources.getStringArray(R.array.liga_desc)
-        items.clear()
-        for (i in name.indices) {
-            items.add(
-                Liga(
-                    name[i],
-                    id[i],
-                    desc[i],
-                    image.getResourceId(i, 0)
-                )
-            )
-        }
+
+        repository.listLeague()
+
         //Recycle the typed array
         image.recycle()
     }

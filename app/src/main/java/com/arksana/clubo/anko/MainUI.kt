@@ -1,7 +1,8 @@
 package com.arksana.clubo.anko
 
 import androidx.recyclerview.widget.RecyclerView
-import com.arksana.clubo.MainActivity
+
+import com.arksana.clubo.ui.MainActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
