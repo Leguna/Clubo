@@ -8,9 +8,10 @@ import com.arksana.clubo.utils.RetrofitInterface
 import retrofit2.*
 
 
-class Repository() : ViewModel() {
+class Repository : ViewModel() {
 
     val leagues = MutableLiveData<Leagues>()
+    var items: ArrayList<League> = ArrayList()
 
     val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
     val service = retrofit?.create(RetrofitInterface::class.java)

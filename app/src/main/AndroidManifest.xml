@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".main.DetailActivity"
             android:label="@string/title_activity_match"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".main.SplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".main.MainActivity" />
     </application>
 
 </manifest>
