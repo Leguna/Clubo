@@ -10,62 +10,6 @@ data class Leagues(
         val leagues: List<League>
 )
 
-@Parcelize
-data class LeagueX(
-        @SerializedName("dateFirstEvent")
-        val dateFirstEvent: String, // 2000-08-18
-        @SerializedName("idCup")
-        val idCup: String, // 0
-        @SerializedName("idLeague")
-        val idLeague: String, // 4328
-        @SerializedName("idSoccerXML")
-        val idSoccerXML: String, // 1
-        @SerializedName("intFormedYear")
-        val intFormedYear: String, // 1992
-        @SerializedName("strBadge")
-        val strBadge: String, // https://www.thesportsdb.com/images/media/league/badge/i6o0kh1549879062.png
-        @SerializedName("strBanner")
-        val strBanner: String, // https://www.thesportsdb.com/images/media/league/banner/4m3g4s1520767740.jpg
-        @SerializedName("strComplete")
-        val strComplete: String, // yes
-        @SerializedName("strCountry")
-        val strCountry: String, // England
-        @SerializedName("strDescriptionEN")
-        val strDescriptionEN: String, // The Premier League (often referred to as the English Premier League (EPL) outside England), is the top level of the English football league system. Contested by 20 clubs, it operates on a system of promotion and relegation with the English Football League (EFL).The Premier League is a corporation in which the member clubs act as shareholders. Seasons run from August to May with each team playing 38 matches (playing each other home and away). Most games are played on Saturday and Sunday afternoons. The Premier League has featured 47 English and two Welsh clubs since its inception, making it a cross-border league.The competition was formed as the FA Premier League on 20 February 1992 following the decision of clubs in the Football League First Division to break away from the Football League, founded in 1888, and take advantage of a lucrative television rights deal. The deal was worth £1 billion a year domestically as of 2013–14, with BSkyB and BT Group securing the domestic rights to broadcast 116 and 38 games respectively. The league generates €2.2 billion per year in domestic and international television rights. In 2014–15, teams were apportioned revenues of £1.6 billion, rising sharply to £2.4 billion in 2016–17.The Premier League is the most-watched sports league in the world, broadcast in 212 territories to 643 million homes and a potential TV audience of 4.7 billion people. In the 2014–15 season, the average Premier League match attendance exceeded 36,000, second highest of any professional football league behind the Bundesliga's 43,500. Most stadium occupancies are near capacity. The Premier League ranks second in the UEFA coefficients of leagues based on performances in European competitions over the past five seasons, as of 2018.Forty-nine clubs have competed since the inception of the Premier League in 1992. Six of them have won the title: Manchester United (13), Chelsea (5), Arsenal (3), Manchester City (3), Blackburn Rovers (1), and Leicester City (1). Following the 2003–04 season, Arsenal acquired the nickname "The Invincibles" as they became, and still remain, the only club to complete a Premier League campaign without losing a single game. The record of most points in a season is 100 by Manchester City in 2017–18.
-        @SerializedName("strDescriptionES")
-        val strDescriptionES: String, // La Premier League, también conocida en el Reino Unido como The Premiership, es la máxima categoría del sistema de Ligas de fútbol de Inglaterra. Comenzó a disputarse en la temporada 1992-93 y desde entonces se ha celebrado sin interrupciones. En ella pueden también participar clubes del País de Gales que se encuentren adscritos al citado sistema de ligas, como si de otros clubes ingleses se tratara. Este es el caso del Swansea City Association Football Club, club radicado en Gales participante de la liga y que ha llegado a representar a Inglaterra en competiciones europeas.Establecida la Primera División de Inglaterra denominada como The Football League en 1888 bajo amparo de The Football Association, se fusionó en 1892 con la Football Alliance para conformar el primer sistema de divisiones, y pasándose a denominar la principal categoría como Football League First Division. Dicho sistema fue ampliándose hasta que se produjo una escisión en la competición pasando a ser la Football League —que actualmente conforma tres divisiones— Premier League su principal exponente, mientras que la hasta el momento Primera División conjunta de Inglaterra y Gales de la Football League pasó a ser la Segunda.El actual formato fue establecido tras un acuerdo el 20 de febrero de 1992 entre los clubes de la First Division por el que decidían separarse de la Football League para tomar ventaja de un lucrativo contrato de derechos de televisión impulsado por ellos mismos. Es por tanto una competición de carácter privado o sociedad en la que los veinte clubes miembros actúan como accionistas a través de una persona delegada por cada representante, quienes rigen dicho comité junto con Dave Richards, director del mismo, y Richard Scudamore, su director ejecutivo.El torneo fue considerado por la Federación Internacional de Historia y Estadística de Fútbol de la FIFA como la liga más fuerte de la primera década del siglo xxi en Europa, superando a la Primera División de España y la Serie A de Italia que ocupaban el segundo y tercer lugar respectivamente.2Desde su segunda edición y hasta la temporada 2015-16 el nombre del patrocinador principal se reflejaba en su denominación oficial, siendo el último desde 2004 cuando se conocía como Barclays Premier League, circunstancia que dejó de ser así a partir de la temporada 2016-17, cuando desapareció cualquier alusión a los patrocinadores con el propósito de mantener una imagen comercial limpia. Desde entonces se conoce simplemente como Premier League.A lo largo de su historia seis clubes han resultado campeones, siendo el Manchester United Football Club el equipo más laureado con trece campeonatos. Chelsea Football Club, Arsenal Football Club, Manchester City Football Club, Blackburn Rovers Football Club y Leicester City Football Club completan el resto de títulos de las veinticinco temporadas del campeonato.El mayor número de puntos en una edición, con noventa y cinco, fue logrado en las temporada 2004-05 por el Chelsea F. C., logrando también el récord de goles en una edición con 103 en la temporada 2009-10.
-        @SerializedName("strDivision")
-        val strDivision: String, // 0
-        @SerializedName("strFacebook")
-        val strFacebook: String, // en-gb.facebook.com/premierleague/
-        @SerializedName("strGender")
-        val strGender: String, // Male
-        @SerializedName("strLeague")
-        val strLeague: String, // English Premier League
-        @SerializedName("strLeagueAlternate")
-        val strLeagueAlternate: String, // Premier League
-        @SerializedName("strLocked")
-        val strLocked: String, // unlocked
-        @SerializedName("strLogo")
-        val strLogo: String, // https://www.thesportsdb.com/images/media/league/logo/4c377s1535214890.png
-        @SerializedName("strNaming")
-        val strNaming: String, // {strHomeTeam} vs {strAwayTeam}
-        @SerializedName("strPoster")
-        val strPoster: String, // https://www.thesportsdb.com/images/media/league/poster/v8d7nf1535455996.jpg
-        @SerializedName("strRSS")
-        val strRSS: String, // http://feeds.feedburner.com/PremierLeagueFootballNews
-        @SerializedName("strSport")
-        val strSport: String, // Soccer
-        @SerializedName("strTrophy")
-        val strTrophy: String, // https://www.thesportsdb.com/images/media/league/trophy/yrywtr1422246014.png
-        @SerializedName("strTwitter")
-        val strTwitter: String, // twitter.com/premierleague
-        @SerializedName("strWebsite")
-        val strWebsite: String, // www.premierleague.com
-        @SerializedName("strYoutube")
-        val strYoutube: String // www.youtube.com/channel/UCG5qGWdu8nIRZqJ_GgDwQ-w
-) : Parcelable
-
 
 @Parcelize
 data class League(

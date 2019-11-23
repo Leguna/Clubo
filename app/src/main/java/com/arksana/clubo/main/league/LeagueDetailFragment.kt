@@ -6,32 +6,50 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.R
+import com.arksana.clubo.adapter.MatchAdapter
+import com.arksana.clubo.data.Match
+import com.arksana.clubo.data.Repository
+import com.arksana.clubo.main.DetailActivity
+import kotlinx.android.synthetic.main.fragment_league.*
 
-/**
- * A placeholder fragment containing a simple view.
- */
 class LeagueDetailFragment : Fragment() {
 
-    private lateinit var leagueDetailViewModel: LeagueDetailViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        leagueDetailViewModel = ViewModelProviders.of(this).get(LeagueDetailViewModel::class.java).apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-        }
-    }
+    private val repository = Repository()
+    private var index = 0
+    private var items: List<Match> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_league, container, false)
-        leagueDetailViewModel.text.observe(this, Observer<String> {
+        return inflater.inflate(R.layout.fragment_league, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        showLoading(true)
+        index = arguments?.getInt(ARG_SECTION_NUMBER)!!
+        if (index == 1)
+            repository.prevMatch(DetailActivity.league?.idLeague.toString())
+        else repository.nextMatch(DetailActivity.league?.idLeague.toString())
+
+        rv_category.layoutManager = LinearLayoutManager(context)
+        repository.matches.observe(this, Observer {
+            showLoading(false)
+//            items = ArrayList(it.matches)
+            rv_category.adapter = MatchAdapter(it.matches) {
+                println(it.idEvent + " " + it.strEvent)
+            }
         })
-        return root
+
+    }
+
+    fun showLoading(state: Boolean) {
+        if (state) loading_overlay.visibility = View.VISIBLE
+        else loading_overlay.visibility = View.GONE
     }
 
     companion object {

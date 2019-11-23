@@ -11,10 +11,15 @@ import retrofit2.*
 class Repository : ViewModel() {
 
     val leagues = MutableLiveData<Leagues>()
-    var items: ArrayList<League> = ArrayList()
+    val league = MutableLiveData<League>()
 
-    val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
-    val service = retrofit?.create(RetrofitInterface::class.java)
+    val matches = MutableLiveData<Matches>()
+    val match = MutableLiveData<Match>()
+
+    val team = MutableLiveData<Team>()
+
+    private val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
+    private val service = retrofit?.create(RetrofitInterface::class.java)
 
     fun listLeague() {
         service?.getListLeague()?.enqueue(object : Callback<Leagues> {
@@ -24,43 +29,95 @@ class Repository : ViewModel() {
                     leagues.postValue(data)
                 }
             }
-
             override fun onFailure(call: Call<Leagues>, error: Throwable) {
-                Log.e("tag", "errornya ${error.message}")
+                println("ListLeague Error")
             }
         })
     }
 
-    fun detailLeague(id: Int) {
+    fun prevMatch(id: String) {
+        service?.getPrevMatch(id)?.enqueue(object : Callback<Matches> {
+            override fun onFailure(call: Call<Matches>, t: Throwable) {
+                println("PrevMatch Error")
+            }
+
+            override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
+                var data = response.body()
+
+                println(data?.matches == null)
+                if (data?.matches == null) data = Matches(emptyList())
+                println("Prev: ")
+                matches.postValue(data)
+            }
+        })
+    }
+
+    fun nextMatch(id: String) {
+        service?.getNextMatch(id)?.enqueue(object : Callback<Matches> {
+            override fun onFailure(call: Call<Matches>, t: Throwable) {
+                println("NextMatch Error")
+            }
+
+            override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
+                var data = response.body()
+                println(data?.matches == null)
+                if (data?.matches == null) data = Matches(emptyList())
+                println("Next: ")
+                matches.postValue(data)
+            }
+        })
+    }
+
+    fun detailMatch(id: String) {
+        service?.getDetailMatch(id)?.enqueue(object : Callback<Match> {
+            override fun onFailure(call: Call<Match>, t: Throwable) {
+
+            }
+
+            override fun onResponse(call: Call<Match>, response: Response<Match>) {
+                val data = response.body()
+                match.postValue(data)
+            }
+        })
+    }
+
+    fun search(query: String) {
+        service?.getSearch(query)?.enqueue(object : Callback<Matches> {
+            override fun onFailure(call: Call<Matches>, t: Throwable) {
+                println("Fail Search Data.")
+            }
+
+            override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
+                val data = response.body()
+                matches.postValue(data)
+            }
+        })
+    }
+
+    fun detailLeague(id: String) {
         service?.getDetailLeague(id)?.enqueue(object : Callback<League?> {
-
-
             override fun onResponse(call: Call<League?>, response: Response<League?>) {
                 if (response.isSuccessful) {
                     val data = response.body()
-                    Log.d("tag", "responsennya ${data}")
+                    league.postValue(data)
                 }
             }
-
             override fun onFailure(call: Call<League?>, t: Throwable) {
-                println("Errornya: " + t)
+                println("Errornya: $t")
             }
         })
     }
 
-    fun prevMatch() {
+    fun detailTeam(id: String) {
+        service?.getTeam(id)?.enqueue(object : Callback<Team> {
+            override fun onFailure(call: Call<Team>, t: Throwable) {}
 
-    }
-
-    fun nextMatch() {
-
-    }
-
-    fun detailMatch() {
-
-    }
-
-    fun search() {
-
+            override fun onResponse(call: Call<Team>, response: Response<Team>) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    team.postValue(data)
+                }
+            }
+        })
     }
 }

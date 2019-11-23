@@ -12,6 +12,7 @@ import com.arksana.clubo.data.Repository
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
+
 class MainActivity : AppCompatActivity() {
 
     var items: List<League> = ArrayList()
@@ -22,10 +23,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (repository.items.isEmpty()) {
-            repository.listLeague()
-            showLoading(true)
-        }
+        repository.listLeague()
+        showLoading(true)
 
         rv_category.layoutManager = LinearLayoutManager(this)
         repository.leagues.observe(this, Observer {
