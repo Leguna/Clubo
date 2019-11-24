@@ -36,20 +36,27 @@ class LeagueDetailFragment : Fragment() {
             repository.prevMatch(DetailActivity.league?.idLeague.toString())
         else repository.nextMatch(DetailActivity.league?.idLeague.toString())
 
-        rv_category.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         repository.matches.observe(this, Observer {
-            showLoading(false)
-//            items = ArrayList(it.matches)
-            rv_category.adapter = MatchAdapter(it.matches) {
+            items = ArrayList(it.matches)
+            recyclerView.adapter = MatchAdapter(it.matches) {
                 println(it.idEvent + " " + it.strEvent)
             }
+            showLoading(false)
         })
 
     }
 
     fun showLoading(state: Boolean) {
         if (state) loading_overlay.visibility = View.VISIBLE
-        else loading_overlay.visibility = View.GONE
+        else {
+            loading_overlay.visibility = View.GONE
+            text_overlay.visibility = View.GONE
+        }
+
+        if (!state && items.isEmpty()) {
+            text_overlay.visibility = View.VISIBLE
+        }
     }
 
     companion object {

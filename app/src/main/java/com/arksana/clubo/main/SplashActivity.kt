@@ -16,7 +16,7 @@ import java.util.*
 class SplashActivity : AppCompatActivity() {
 
     internal lateinit var timer: Timer
-    private val waktu = 3000
+    private val waktu = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

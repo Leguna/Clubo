@@ -26,17 +26,17 @@ class MainActivity : AppCompatActivity() {
         repository.listLeague()
         showLoading(true)
 
-        rv_category.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         repository.leagues.observe(this, Observer {
             showLoading(false)
             items = it.leagues
-            rv_category.adapter = LigaAdapter(items) {
-                startActivity<DetailActivity>(DetailActivity.EXTRA_LEAGUE to it)
+            recyclerView.adapter = LigaAdapter(items) { league ->
+                startActivity<DetailActivity>(DetailActivity.EXTRA_LEAGUE to league)
+                println(league.idLeague)
             }
         })
 
     }
-
 
     fun showLoading(state: Boolean) {
         if (state) loading_overlay.visibility = View.VISIBLE

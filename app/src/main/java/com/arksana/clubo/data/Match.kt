@@ -6,129 +6,120 @@ import kotlinx.android.parcel.Parcelize
 
 
 data class Matches(
-    @SerializedName("events")
+    @SerializedName("events", alternate = ["event"])
     val matches: List<Match>
 )
 
 @Parcelize
 data class Match(
     @SerializedName("dateEvent")
-    val dateEvent: String, // 2019-11-21
+    val dateEvent: String?, // 2019-11-30
     @SerializedName("dateEventLocal")
-    val dateEventLocal: String, // 2019-11-20
+    val dateEventLocal: String?, // 2019-11-23
     @SerializedName("idAwayTeam")
-    val idAwayTeam: String, // 134860
+    val idAwayTeam: String?, // 133613
     @SerializedName("idEvent")
-    val idEvent: String, // 647900
+    val idEvent: String?, // 602266
     @SerializedName("idHomeTeam")
-    val idHomeTeam: String, // 134866
+    val idHomeTeam: String?, // 134777
     @SerializedName("idLeague")
-    val idLeague: String, // 4387
+    val idLeague: String?, // 4328
     @SerializedName("idSoccerXML")
-    val idSoccerXML: String, // null
+    val idSoccerXML: String?, // 402117
     @SerializedName("intAwayScore")
-    val intAwayScore: String, // 107
+    val intAwayScore: String? = "0", // 3
     @SerializedName("intAwayShots")
-    val intAwayShots: String, // null
+    val intAwayShots: String?, // null
     @SerializedName("intHomeScore")
-    val intHomeScore: String, // 112
+    val intHomeScore: String? = "0", // 2
     @SerializedName("intHomeShots")
-    val intHomeShots: String, // null
+    val intHomeShots: String?, // null
     @SerializedName("intRound")
-    val intRound: String, // 0
+    val intRound: String? = "0", // 14
     @SerializedName("intSpectators")
-    val intSpectators: String, // null
+    val intSpectators: String?, // null
     @SerializedName("strAwayFormation")
-    val strAwayFormation: String, // null
+    val strAwayFormation: String?, // null
     @SerializedName("strAwayGoalDetails")
-    val strAwayGoalDetails: String, // null
+    val strAwayGoalDetails: String?,
     @SerializedName("strAwayLineupDefense")
-    val strAwayLineupDefense: String, // null
+    val strAwayLineupDefense: String?,
     @SerializedName("strAwayLineupForward")
-    val strAwayLineupForward: String, // null
+    val strAwayLineupForward: String?,
     @SerializedName("strAwayLineupGoalkeeper")
-    val strAwayLineupGoalkeeper: String, // null
+    val strAwayLineupGoalkeeper: String?,
     @SerializedName("strAwayLineupMidfield")
-    val strAwayLineupMidfield: String, // null
+    val strAwayLineupMidfield: String?,
     @SerializedName("strAwayLineupSubstitutes")
-    val strAwayLineupSubstitutes: String, // null
+    val strAwayLineupSubstitutes: String?,
     @SerializedName("strAwayRedCards")
-    val strAwayRedCards: String, // null
+    val strAwayRedCards: String?,
     @SerializedName("strAwayTeam")
-    val strAwayTeam: String, // Boston Celtics
+    val strAwayTeam: String?, // Man City
     @SerializedName("strAwayYellowCards")
-    val strAwayYellowCards: String, // null
+    val strAwayYellowCards: String?,
     @SerializedName("strBanner")
-    val strBanner: String, // null
+    val strBanner: String?, // null
     @SerializedName("strCircuit")
-    val strCircuit: String, // null
+    val strCircuit: String?, // null
     @SerializedName("strCity")
-    val strCity: String, // null
+    val strCity: String?, // null
     @SerializedName("strCountry")
-    val strCountry: String, // null
+    val strCountry: String?, // null
     @SerializedName("strDate")
-    val strDate: String, // null
+    val strDate: String?, // 30/11/19
     @SerializedName("strDescriptionEN")
-    val strDescriptionEN: String, // null
+    val strDescriptionEN: String?,
     @SerializedName("strEvent")
-    val strEvent: String, // Los Angeles Clippers vs Boston Celtics
+    val strEvent: String?, // Newcastle vs Man City
     @SerializedName("strEventAlternate")
-    val strEventAlternate: String, // Boston Celtics @ Los Angeles Clippers
+    val strEventAlternate: String?, // Man City @ Newcastle
     @SerializedName("strFanart")
-    val strFanart: String, // null
+    val strFanart: String?, // null
     @SerializedName("strFilename")
-    val strFilename: String, // NBA 2019-11-21 Los Angeles Clippers vs Boston Celtics
+    val strFilename: String?, // English Premier League 2019-11-30 Newcastle vs Man City
     @SerializedName("strHomeFormation")
-    val strHomeFormation: String, // null
+    val strHomeFormation: String?, // null
     @SerializedName("strHomeGoalDetails")
-    val strHomeGoalDetails: String, // null
+    val strHomeGoalDetails: String?,
     @SerializedName("strHomeLineupDefense")
-    val strHomeLineupDefense: String, // null
+    val strHomeLineupDefense: String?,
     @SerializedName("strHomeLineupForward")
-    val strHomeLineupForward: String, // null
+    val strHomeLineupForward: String?,
     @SerializedName("strHomeLineupGoalkeeper")
-    val strHomeLineupGoalkeeper: String, // null
+    val strHomeLineupGoalkeeper: String?,
     @SerializedName("strHomeLineupMidfield")
-    val strHomeLineupMidfield: String, // null
+    val strHomeLineupMidfield: String?,
     @SerializedName("strHomeLineupSubstitutes")
-    val strHomeLineupSubstitutes: String, // null
+    val strHomeLineupSubstitutes: String?,
     @SerializedName("strHomeRedCards")
-    val strHomeRedCards: String, // null
+    val strHomeRedCards: String?,
     @SerializedName("strHomeTeam")
-    val strHomeTeam: String, // Los Angeles Clippers
+    val strHomeTeam: String?, // Newcastle
     @SerializedName("strHomeYellowCards")
-    val strHomeYellowCards: String, // null
+    val strHomeYellowCards: String?,
     @SerializedName("strLeague")
-    val strLeague: String, // NBA
+    val strLeague: String?, // English Premier League
     @SerializedName("strLocked")
-    val strLocked: String, // unlocked
+    val strLocked: String?, // unlocked
     @SerializedName("strMap")
-    val strMap: String, // null
+    val strMap: String?, // null
     @SerializedName("strPoster")
-    val strPoster: String, // null
+    val strPoster: String?, // null
     @SerializedName("strResult")
-    val strResult: String, // null
+    val strResult: String?,
     @SerializedName("strSeason")
-    val strSeason: String, // 1920
+    val strSeason: String?, // 1920
     @SerializedName("strSport")
-    val strSport: String, // Basketball
+    val strSport: String?, // Soccer
     @SerializedName("strTVStation")
-    val strTVStation: String, // null
+    val strTVStation: String?, // null
     @SerializedName("strThumb")
-    val strThumb: String, // null
+    val strThumb: String?, // https://www.thesportsdb.com/images/media/event/thumb/e84qfr1574511008.jpg
     @SerializedName("strTime")
-    val strTime: String, // 03:00:00
+    val strTime: String?, // 12:30:00
     @SerializedName("strTimeLocal")
-    val strTimeLocal: String, // 10:00 PM ET
-    @SerializedName("strTweet1")
-    val strTweet1: String, // null
-    @SerializedName("strTweet2")
-    val strTweet2: String, // null
-    @SerializedName("strTweet3")
-    val strTweet3: String, // null
-    @SerializedName("strVideo")
-    val strVideo: String // null
+    val strTimeLocal: String? // 13:30:00
 ) : Parcelable
-
 
 

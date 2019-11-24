@@ -44,9 +44,7 @@ class Repository : ViewModel() {
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
 
-                println(data?.matches == null)
                 if (data?.matches == null) data = Matches(emptyList())
-                println("Prev: ")
                 matches.postValue(data)
             }
         })
@@ -60,9 +58,7 @@ class Repository : ViewModel() {
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
-                println(data?.matches == null)
                 if (data?.matches == null) data = Matches(emptyList())
-                println("Next: ")
                 matches.postValue(data)
             }
         })
@@ -88,7 +84,10 @@ class Repository : ViewModel() {
             }
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
-                val data = response.body()
+                println(call.request().url())
+                var data = response.body()
+                println(data)
+                if (data?.matches == null) data = Matches(emptyList())
                 matches.postValue(data)
             }
         })

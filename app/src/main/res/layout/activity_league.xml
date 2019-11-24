@@ -93,10 +93,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:gravity="bottom"
+                app:menu="@menu/list_menu"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|snap|enterAlways"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
                 app:title="@string/app_name" />
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout

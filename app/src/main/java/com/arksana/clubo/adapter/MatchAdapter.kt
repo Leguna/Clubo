@@ -1,5 +1,6 @@
 package com.arksana.clubo.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,17 +23,21 @@ class MatchAdapter(var list: List<Match> = arrayListOf(), val listener: (Match) 
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
 
         val match = list[position]
 
         holder.match.text = match.strEvent
-        holder.score.text = match.intHomeScore
-        holder.score2.text = match.intAwayScore
+        holder.score.text = (match.intHomeScore ?: "0")
+        holder.score2.text = (match.intAwayScore ?: "0")
         holder.round.text = match.intRound + " Round"
         holder.date.text = match.dateEvent
         holder.time.text = match.strTime
 
+        holder.item.setOnClickListener {
+            listener(match)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -47,6 +52,8 @@ class MatchAdapter(var list: List<Match> = arrayListOf(), val listener: (Match) 
         val round = itemView.tv_round
         val date = itemView.tv_date
         val time = itemView.tv_time
+
+        val item = itemView.item
 
     }
 }

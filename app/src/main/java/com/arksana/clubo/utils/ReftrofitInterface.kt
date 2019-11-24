@@ -23,7 +23,7 @@ interface RetrofitInterface {
     @GET("lookupevent")
     fun getDetailMatch(@Query("id") id: String): Call<Match>
 
-    @GET("searchevents.php")
+    @GET("searchevents.php?")
     fun getSearch(@Query("e") query: String): Call<Matches>
 
     @GET("lookupteam.php?")

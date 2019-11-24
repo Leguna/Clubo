@@ -1,19 +1,23 @@
 package com.arksana.clubo.main
 
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.viewpager.widget.ViewPager
 import com.arksana.clubo.R
 import com.arksana.clubo.data.League
-import com.arksana.clubo.data.Repository
 import com.arksana.clubo.main.league.SectionsPagerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_league.*
+import org.jetbrains.anko.startActivity
 
 
 class DetailActivity : AppCompatActivity() {
@@ -33,9 +37,7 @@ class DetailActivity : AppCompatActivity() {
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        setToolbar()
 
         if (intent.hasExtra(EXTRA_LEAGUE)) {
             league = intent.getParcelableExtra(EXTRA_LEAGUE)
@@ -55,6 +57,43 @@ class DetailActivity : AppCompatActivity() {
             .into(image_league)
     }
 
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.list_menu, menu)
+
+        val searchView: SearchView =
+            toolbar.menu.findItem(R.id.action_search).actionView as SearchView
+
+        searchView.queryHint = resources.getString(R.string.search)
+        searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                println("Hasdaszxc")
+                startActivity<SearchActivity>(SearchActivity.EXTRA_QUERY to query)
+//                    favoriteFragment.searchData(query)
+//                    moviesFragment.searchData(query)
+//                    tvshowFragment.searchData(query)
+//                    moviesFragment.rvCategoryMode.setVisibility(View.VISIBLE)
+//                    tvshowFragment.rvCategoryMode.setVisibility(View.VISIBLE)
+//                    favoriteFragment.rvCategoryMode.setVisibility(View.VISIBLE)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                println("Hasdaszxc22")
+                return false
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
