@@ -1,6 +1,5 @@
 package com.arksana.clubo.utils
 
-import com.arksana.clubo.data.League
 import com.arksana.clubo.data.Leagues
 import com.arksana.clubo.data.Matches
 import com.arksana.clubo.data.Teams
@@ -15,7 +14,7 @@ interface RetrofitInterface {
     fun getListLeague(): Call<Leagues>
 
     @GET("lookupleague.php?")
-    fun getDetailLeague(@Query("id") id: String): Call<League>
+    fun getDetailLeague(@Query("id") id: String): Call<Leagues>
 
     @GET("eventspastleague.php?")
     fun getPrevMatch(@Query("id") id: String): Call<Matches>

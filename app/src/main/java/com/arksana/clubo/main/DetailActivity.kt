@@ -6,9 +6,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.arksana.clubo.R
 import com.arksana.clubo.data.League
+import com.arksana.clubo.data.Repository
 import com.arksana.clubo.main.league.SectionsPagerAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -24,6 +26,8 @@ class DetailActivity : AppCompatActivity() {
         var league: League? = null
     }
 
+    private val repository = Repository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league)
@@ -38,18 +42,23 @@ class DetailActivity : AppCompatActivity() {
 
         if (intent.hasExtra(EXTRA_LEAGUE)) {
             league = intent.getParcelableExtra(EXTRA_LEAGUE)
-            initLeague()
+            repository.detailLeague(league?.idLeague!!)
+            toolbar.title = league?.strLeague
         }
+
+        repository.league.observe(this, Observer {
+            initLeague(it)
+        })
 
     }
 
-    private fun initLeague() {
-        toolbar.title = league?.strLeague
-        tv_country.text = league?.strCountry
-        tv_desc.text = league?.strDescriptionEN
-        tv_formed.text = league?.intFormedYear
+    private fun initLeague(league: League) {
+        toolbar.title = league.strLeague
+        tv_country.text = league.strCountry
+        tv_desc.text = league.strDescriptionEN
+        tv_formed.text = league.intFormedYear
         Glide.with(this)
-            .load(league?.strBadge)
+            .load(league.strBadge)
             .apply(RequestOptions().override(200, 300))
             .into(image_league)
     }
@@ -74,7 +83,6 @@ class DetailActivity : AppCompatActivity() {
                     startActivity<SearchActivity>(SearchActivity.EXTRA_QUERY to query)
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }

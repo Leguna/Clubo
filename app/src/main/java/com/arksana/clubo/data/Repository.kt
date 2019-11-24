@@ -69,7 +69,7 @@ class Repository : ViewModel() {
     fun detailMatch(id: String) {
         service?.getDetailMatch(id)?.enqueue(object : Callback<Matches> {
             override fun onFailure(call: Call<Matches>, t: Throwable) {
-
+                println("LALA")
             }
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
@@ -77,6 +77,7 @@ class Repository : ViewModel() {
                 matches.postValue(data)
             }
         })
+        println("ID" + id)
     }
 
     fun search(query: String) {
@@ -84,30 +85,36 @@ class Repository : ViewModel() {
             override fun onFailure(call: Call<Matches>, t: Throwable) {
                 println("Fail Search Data.")
             }
-
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
                 if (data?.matches == null) data = Matches(emptyList())
-                matches.postValue(data)
+
+                var list = ArrayList<Match>()
+                data.matches.forEach {
+                    if (it.strSport.equals("Soccer"))
+                        list.add(it)
+                }
+                matches.postValue(Matches(list))
             }
         })
     }
 
     fun detailLeague(id: String) {
-        service?.getDetailLeague(id)?.enqueue(object : Callback<League?> {
-            override fun onResponse(call: Call<League?>, response: Response<League?>) {
+        service?.getDetailLeague(id)?.enqueue(object : Callback<Leagues?> {
+            override fun onResponse(call: Call<Leagues?>, response: Response<Leagues?>) {
                 if (response.isSuccessful) {
                     val data = response.body()
-                    league.postValue(data)
+                    league.postValue(data?.leagues?.get(0))
                 }
             }
-            override fun onFailure(call: Call<League?>, t: Throwable) {
+
+            override fun onFailure(call: Call<Leagues?>, t: Throwable) {
                 println("Errornya: $t")
             }
         })
     }
 
-    fun detailTeam(id: String, index: Int) {
+    private fun detailTeam(id: String, index: Int) {
         service?.getTeam(id)?.enqueue(object : Callback<Teams> {
             override fun onFailure(call: Call<Teams>, t: Throwable) {}
 
@@ -115,7 +122,6 @@ class Repository : ViewModel() {
                 if (response.isSuccessful) {
                     val data = response.body()
                     teams[index] = data!!
-
                     if (teams[0] != null && teams[1] != null)
                         team.postValue(teams)
                 }
@@ -126,7 +132,6 @@ class Repository : ViewModel() {
     fun allDetailTeam(id: Array<String>) {
         id.forEachIndexed { index, s ->
             detailTeam(s, index)
-
         }
     }
 }
