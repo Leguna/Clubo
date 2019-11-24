@@ -17,7 +17,7 @@ class Repository : ViewModel() {
 
     val matches = MutableLiveData<Matches>()
 
-    val teams = ArrayList<Teams>()
+    val teams = ArrayList<Teams>(listOf(null, null))
     val team = MutableLiveData<ArrayList<Teams>>()
 
     private val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
@@ -74,8 +74,6 @@ class Repository : ViewModel() {
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 val data = response.body()
-                println(data)
-                println(call.request().url())
                 matches.postValue(data)
             }
         })
@@ -88,9 +86,7 @@ class Repository : ViewModel() {
             }
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
-                println(call.request().url())
                 var data = response.body()
-                println(data)
                 if (data?.matches == null) data = Matches(emptyList())
                 matches.postValue(data)
             }
@@ -111,24 +107,26 @@ class Repository : ViewModel() {
         })
     }
 
-    fun detailTeam(id: String) {
+    fun detailTeam(id: String, index: Int) {
         service?.getTeam(id)?.enqueue(object : Callback<Teams> {
             override fun onFailure(call: Call<Teams>, t: Throwable) {}
 
             override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
                 if (response.isSuccessful) {
                     val data = response.body()
-                    teams.add(data!!)
-                    if (teams.size == 2) team.postValue(teams)
-                    println(call.request().url())
+                    teams[index] = data!!
+
+                    if (teams[0] != null && teams[1] != null)
+                        team.postValue(teams)
                 }
             }
         })
     }
 
     fun allDetailTeam(id: Array<String>) {
-        id.forEach {
-            detailTeam(it)
+        id.forEachIndexed { index, s ->
+            detailTeam(s, index)
+
         }
     }
 }
