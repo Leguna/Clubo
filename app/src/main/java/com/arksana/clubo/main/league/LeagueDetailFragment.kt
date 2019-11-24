@@ -1,5 +1,6 @@
 package com.arksana.clubo.main.league
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,9 @@ import com.arksana.clubo.adapter.MatchAdapter
 import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
 import com.arksana.clubo.main.DetailActivity
+import com.arksana.clubo.main.MatchActivity
 import kotlinx.android.synthetic.main.fragment_league.*
+import org.jetbrains.anko.startActivity
 
 class LeagueDetailFragment : Fragment() {
 
@@ -39,8 +42,10 @@ class LeagueDetailFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         repository.matches.observe(this, Observer {
             items = ArrayList(it.matches)
-            recyclerView.adapter = MatchAdapter(it.matches) {
-                println(it.idEvent + " " + it.strEvent)
+            recyclerView.adapter = MatchAdapter(it.matches) { match ->
+                val intent = Intent(context, MatchActivity::class.java)
+                intent.putExtra(MatchActivity.EXTRA_IDMATCH, match.idEvent)
+                startActivity(intent)
             }
             showLoading(false)
         })

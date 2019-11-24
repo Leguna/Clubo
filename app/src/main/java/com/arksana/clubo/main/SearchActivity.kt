@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.R
@@ -12,6 +13,7 @@ import com.arksana.clubo.adapter.MatchAdapter
 import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
 import kotlinx.android.synthetic.main.activity_search.*
+import org.jetbrains.anko.startActivity
 
 class SearchActivity : AppCompatActivity() {
 
@@ -26,16 +28,20 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         repository.matches.observe(this, Observer {
             items = ArrayList(it.matches)
             recyclerView.adapter = MatchAdapter(it.matches) { match ->
-                println(match.idEvent + " " + match.strEvent)
+                startActivity<MatchActivity>(MatchActivity.EXTRA_IDMATCH to match.idEvent)
             }
             showLoading(false)
         })
 
-        repository.search(intent.getStringExtra(EXTRA_QUERY))
+        repository.search(intent.getStringExtra(EXTRA_QUERY)!!)
+        title = intent.getStringExtra(EXTRA_QUERY)
     }
 
     fun showLoading(state: Boolean) {
@@ -47,6 +53,30 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.list_menu, menu)
+
+        val searchView: SearchView = menu?.findItem(R.id.action_search)?.actionView as SearchView
+
+        searchView.queryHint = resources.getString(R.string.search)
+        searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (query.isNotEmpty())
+                    title = query
+                showLoading(true)
+                repository.search(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText?.isNotEmpty()!!) {
+                    showLoading(true)
+                    title = newText
+                    repository.search(newText)
+                }
+                return true
+            }
+        })
+
         return super.onCreateOptionsMenu(menu)
     }
 

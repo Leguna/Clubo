@@ -31,9 +31,9 @@ class MatchAdapter(var list: List<Match> = arrayListOf(), val listener: (Match) 
         holder.match.text = match.strEvent
         holder.score.text = (match.intHomeScore ?: "0")
         holder.score2.text = (match.intAwayScore ?: "0")
-        holder.round.text = match.intRound + " Round"
-        holder.date.text = match.dateEvent
-        holder.time.text = match.strTime
+        holder.round.text = "Round " + (match.intRound ?: "-")
+        holder.date.text = match.dateEvent ?: "-"
+        holder.time.text = match.strTime ?: "-"
 
         holder.item.setOnClickListener {
             listener(match)

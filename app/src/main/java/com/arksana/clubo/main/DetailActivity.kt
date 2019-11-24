@@ -61,8 +61,6 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -75,19 +73,12 @@ class DetailActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                println("Hasdaszxc")
-                startActivity<SearchActivity>(SearchActivity.EXTRA_QUERY to query)
-//                    favoriteFragment.searchData(query)
-//                    moviesFragment.searchData(query)
-//                    tvshowFragment.searchData(query)
-//                    moviesFragment.rvCategoryMode.setVisibility(View.VISIBLE)
-//                    tvshowFragment.rvCategoryMode.setVisibility(View.VISIBLE)
-//                    favoriteFragment.rvCategoryMode.setVisibility(View.VISIBLE)
+                if (query.isNotEmpty())
+                    startActivity<SearchActivity>(SearchActivity.EXTRA_QUERY to query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                println("Hasdaszxc22")
                 return false
             }
         })

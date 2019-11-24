@@ -11,7 +11,7 @@ interface RetrofitInterface {
     @GET("search_all_leagues.php?s=Soccer")
     fun getListLeague(): Call<Leagues>
 
-    @GET("lookupleague")
+    @GET("lookupleague.php?")
     fun getDetailLeague(@Query("id") id: String): Call<League>
 
     @GET("eventspastleague.php?")
@@ -20,8 +20,8 @@ interface RetrofitInterface {
     @GET("eventsnextleague.php?")
     fun getNextMatch(@Query("id") id: String): Call<Matches>
 
-    @GET("lookupevent")
-    fun getDetailMatch(@Query("id") id: String): Call<Match>
+    @GET("lookupevent.php?")
+    fun getDetailMatch(@Query("id") id: String): Call<Matches>
 
     @GET("searchevents.php?")
     fun getSearch(@Query("e") query: String): Call<Matches>

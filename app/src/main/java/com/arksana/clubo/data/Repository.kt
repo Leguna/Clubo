@@ -65,14 +65,16 @@ class Repository : ViewModel() {
     }
 
     fun detailMatch(id: String) {
-        service?.getDetailMatch(id)?.enqueue(object : Callback<Match> {
-            override fun onFailure(call: Call<Match>, t: Throwable) {
+        service?.getDetailMatch(id)?.enqueue(object : Callback<Matches> {
+            override fun onFailure(call: Call<Matches>, t: Throwable) {
 
             }
 
-            override fun onResponse(call: Call<Match>, response: Response<Match>) {
+            override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 val data = response.body()
-                match.postValue(data)
+                println(data)
+                println(call.request().url())
+                matches.postValue(data)
             }
         })
     }
