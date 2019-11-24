@@ -1,11 +1,13 @@
 package com.arksana.clubo.data
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.arksana.clubo.utils.RetrofitClientInstance
 import com.arksana.clubo.utils.RetrofitInterface
-import retrofit2.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 
 class Repository : ViewModel() {
@@ -14,9 +16,9 @@ class Repository : ViewModel() {
     val league = MutableLiveData<League>()
 
     val matches = MutableLiveData<Matches>()
-    val match = MutableLiveData<Match>()
 
-    val team = MutableLiveData<Team>()
+    val teams = ArrayList<Teams>()
+    val team = MutableLiveData<ArrayList<Teams>>()
 
     private val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
     private val service = retrofit?.create(RetrofitInterface::class.java)
@@ -110,15 +112,23 @@ class Repository : ViewModel() {
     }
 
     fun detailTeam(id: String) {
-        service?.getTeam(id)?.enqueue(object : Callback<Team> {
-            override fun onFailure(call: Call<Team>, t: Throwable) {}
+        service?.getTeam(id)?.enqueue(object : Callback<Teams> {
+            override fun onFailure(call: Call<Teams>, t: Throwable) {}
 
-            override fun onResponse(call: Call<Team>, response: Response<Team>) {
+            override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
                 if (response.isSuccessful) {
                     val data = response.body()
-                    team.postValue(data)
+                    teams.add(data!!)
+                    if (teams.size == 2) team.postValue(teams)
+                    println(call.request().url())
                 }
             }
         })
+    }
+
+    fun allDetailTeam(id: Array<String>) {
+        id.forEach {
+            detailTeam(it)
+        }
     }
 }

@@ -1,6 +1,9 @@
 package com.arksana.clubo.utils
 
-import com.arksana.clubo.data.*
+import com.arksana.clubo.data.League
+import com.arksana.clubo.data.Leagues
+import com.arksana.clubo.data.Matches
+import com.arksana.clubo.data.Teams
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -27,5 +30,5 @@ interface RetrofitInterface {
     fun getSearch(@Query("e") query: String): Call<Matches>
 
     @GET("lookupteam.php?")
-    fun getTeam(@Query("id") id: String): Call<Team>
+    fun getTeam(@Query("id") id: String): Call<Teams>
 }

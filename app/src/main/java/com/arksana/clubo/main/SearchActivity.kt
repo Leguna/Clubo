@@ -1,10 +1,10 @@
 package com.arksana.clubo.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +18,7 @@ import org.jetbrains.anko.startActivity
 class SearchActivity : AppCompatActivity() {
 
     companion object {
-        val EXTRA_QUERY = "extra_query"
+        const val EXTRA_QUERY = "extra_query"
     }
 
     private var items: List<Match> = ArrayList()
@@ -31,10 +31,11 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        showLoading(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         repository.matches.observe(this, Observer {
             items = ArrayList(it.matches)
-            recyclerView.adapter = MatchAdapter(it.matches) { match ->
+            recyclerView.adapter = MatchAdapter(this, it.matches) { match ->
                 startActivity<MatchActivity>(MatchActivity.EXTRA_IDMATCH to match.idEvent)
             }
             showLoading(false)

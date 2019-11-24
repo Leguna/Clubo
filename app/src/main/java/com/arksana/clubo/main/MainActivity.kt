@@ -15,9 +15,9 @@ import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
-    var items: List<League> = ArrayList()
+    private var items: List<League> = ArrayList()
 
-    val repository = Repository()
+    private val repository = Repository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showLoading(state: Boolean) {
+    private fun showLoading(state: Boolean) {
         if (state) loading_overlay.visibility = View.VISIBLE
         else loading_overlay.visibility = View.GONE
     }

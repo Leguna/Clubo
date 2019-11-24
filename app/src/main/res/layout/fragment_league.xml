@@ -9,12 +9,14 @@
     tools:context=".main.league.LeagueDetailFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="16dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

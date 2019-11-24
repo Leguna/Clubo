@@ -1,12 +1,9 @@
 package com.arksana.clubo.main
 
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.viewpager.widget.ViewPager
@@ -23,7 +20,7 @@ import org.jetbrains.anko.startActivity
 class DetailActivity : AppCompatActivity() {
 
     companion object {
-        val EXTRA_LEAGUE = "extra_league"
+        const val EXTRA_LEAGUE = "extra_league"
         var league: League? = null
     }
 
@@ -46,7 +43,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
-    fun initLeague() {
+    private fun initLeague() {
         toolbar.title = league?.strLeague
         tv_country.text = league?.strCountry
         tv_desc.text = league?.strDescriptionEN

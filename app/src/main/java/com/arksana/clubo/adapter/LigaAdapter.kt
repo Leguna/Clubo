@@ -1,6 +1,5 @@
 package com.arksana.clubo.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +8,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.clubo.R
-import org.jetbrains.anko.AnkoContext
 
-import com.arksana.clubo.anko.LigaUI
 import com.arksana.clubo.data.League
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_league_list.view.*
 
 
-class LigaAdapter(var list: List<League> = arrayListOf(), val listener: (League) -> Unit) :
+class LigaAdapter(private var list: List<League> = arrayListOf(), val listener: (League) -> Unit) :
     RecyclerView.Adapter<LigaAdapter.LeagueViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder {
@@ -40,7 +37,7 @@ class LigaAdapter(var list: List<League> = arrayListOf(), val listener: (League)
             .into(holder.ivLogo)
         holder.tvTitle.text = league.strLeague
         holder.tvDesc.text = "${league.strDescriptionEN}"
-        holder.layout.setOnClickListener{
+        holder.layout.setOnClickListener {
             listener(league)
         }
     }
@@ -49,7 +46,7 @@ class LigaAdapter(var list: List<League> = arrayListOf(), val listener: (League)
         return list.size
     }
 
-    inner class LeagueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class LeagueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val ivLogo: ImageView = itemView.image_league
         val tvTitle: TextView = itemView.tv_league

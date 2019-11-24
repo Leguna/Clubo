@@ -4,14 +4,28 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.clubo.R
 import com.arksana.clubo.data.Match
+import com.arksana.clubo.data.Repository
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_match_list.view.*
 
 
-class MatchAdapter(var list: List<Match> = arrayListOf(), val listener: (Match) -> Unit) :
+class MatchAdapter(
+    private val owner: LifecycleOwner,
+    private var list: List<Match> = arrayListOf(),
+    val listener: (Match) -> Unit
+) :
     RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         return MatchViewHolder(
@@ -27,6 +41,19 @@ class MatchAdapter(var list: List<Match> = arrayListOf(), val listener: (Match) 
     override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
 
         val match = list[position]
+        val repository = Repository()
+        val ids = arrayOf(match.idHomeTeam.toString(), match.idAwayTeam.toString())
+        repository.allDetailTeam(ids)
+        repository.team.observe(owner, Observer {
+            Glide.with(holder.itemView)
+                .load(it[0].teams!![0]?.strTeamBadge)
+                .apply(RequestOptions().override(200, 300))
+                .into(holder.badge)
+            Glide.with(holder.itemView)
+                .load(it[1].teams!![0]?.strTeamBadge)
+                .apply(RequestOptions().override(200, 300))
+                .into(holder.badge2)
+        })
 
         holder.match.text = match.strEvent
         holder.score.text = (match.intHomeScore ?: "0")
@@ -44,16 +71,17 @@ class MatchAdapter(var list: List<Match> = arrayListOf(), val listener: (Match) 
         return list.size
     }
 
-    inner class MatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val match = itemView.tv_match
-        val score = itemView.tv_score
-        val score2 = itemView.tv_score2
-        val round = itemView.tv_round
-        val date = itemView.tv_date
-        val time = itemView.tv_time
+        val match: TextView = itemView.tv_match
+        val score: TextView = itemView.tv_score
+        val score2: TextView = itemView.tv_score2
+        val round: TextView = itemView.tv_round
+        val date: TextView = itemView.tv_date
+        val time: TextView = itemView.tv_time
+        val item: CardView = itemView.item
 
-        val item = itemView.item
-
+        val badge: ImageView = itemView.iv_badge
+        val badge2: ImageView = itemView.iv_badge2
     }
 }

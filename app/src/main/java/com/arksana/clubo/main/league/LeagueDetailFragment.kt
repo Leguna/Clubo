@@ -15,7 +15,6 @@ import com.arksana.clubo.data.Repository
 import com.arksana.clubo.main.DetailActivity
 import com.arksana.clubo.main.MatchActivity
 import kotlinx.android.synthetic.main.fragment_league.*
-import org.jetbrains.anko.startActivity
 
 class LeagueDetailFragment : Fragment() {
 
@@ -42,7 +41,7 @@ class LeagueDetailFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         repository.matches.observe(this, Observer {
             items = ArrayList(it.matches)
-            recyclerView.adapter = MatchAdapter(it.matches) { match ->
+            recyclerView.adapter = MatchAdapter(this, it.matches) { match ->
                 val intent = Intent(context, MatchActivity::class.java)
                 intent.putExtra(MatchActivity.EXTRA_IDMATCH, match.idEvent)
                 startActivity(intent)
@@ -52,7 +51,7 @@ class LeagueDetailFragment : Fragment() {
 
     }
 
-    fun showLoading(state: Boolean) {
+    private fun showLoading(state: Boolean) {
         if (state) loading_overlay.visibility = View.VISIBLE
         else {
             loading_overlay.visibility = View.GONE

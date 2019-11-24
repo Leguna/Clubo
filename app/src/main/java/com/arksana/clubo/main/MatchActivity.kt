@@ -1,20 +1,22 @@
 package com.arksana.clubo.main
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.arksana.clubo.R
 import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_match.*
 
 class MatchActivity : AppCompatActivity() {
 
     companion object {
-        val EXTRA_IDMATCH = "extra_idmatch"
+        const val EXTRA_IDMATCH = "extra_idmatch"
     }
 
     private val repository = Repository()
@@ -28,9 +30,22 @@ class MatchActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         showLoading(true)
+        repository.team.observe(this, Observer {
+            Glide.with(this)
+                .load(it[0].teams!![0]?.strTeamBadge)
+                .apply(RequestOptions().override(200, 300))
+                .into(iv_badge)
+            Glide.with(this)
+                .load(it[1].teams!![0]?.strTeamBadge)
+                .apply(RequestOptions().override(200, 300))
+                .into(iv_badge2)
+        })
         repository.matches.observe(this, Observer {
             setUI(it.matches[0])
             showLoading(false)
+            val ids =
+                arrayOf(it.matches[0].idHomeTeam.toString(), it.matches[0].idAwayTeam.toString())
+            repository.allDetailTeam(ids)
         })
 
         repository.detailMatch(intent.getStringExtra(EXTRA_IDMATCH)!!)
@@ -38,7 +53,7 @@ class MatchActivity : AppCompatActivity() {
 
 
     @SuppressLint("SetTextI18n")
-    fun setUI(match: Match?) {
+    private fun setUI(match: Match?) {
 
         tv_league.text = match?.strLeague
         tv_match.text = match?.strEvent
@@ -62,7 +77,7 @@ class MatchActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun showLoading(state: Boolean) {
+    private fun showLoading(state: Boolean) {
         if (state) loading_overlay.visibility = View.VISIBLE
         else loading_overlay.visibility = View.GONE
     }
