@@ -14,7 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String","BASE_URL",'"https://www.thesportsdb.com/api/v1/json/1/"')
+        buildConfigField("String", "BASE_URL", '"https://www.thesportsdb.com/api/v1/json/1/"')
     }
     buildTypes {
         release {
@@ -66,4 +66,5 @@ dependencies {
     implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
     implementation "org.jetbrains.anko:anko-cardview-v7:$anko_version"
+    implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
 }

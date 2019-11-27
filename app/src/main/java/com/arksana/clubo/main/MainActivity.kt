@@ -1,46 +1,44 @@
 package com.arksana.clubo.main
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.arksana.clubo.R
-import com.arksana.clubo.adapter.LigaAdapter
-import com.arksana.clubo.data.League
-import com.arksana.clubo.data.Repository
-import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
+import com.arksana.clubo.main.mainactivity.MyPagerAdapter
+import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
-
-    private var items: List<League> = ArrayList()
-
-    private val repository = Repository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        repository.listLeague()
-        showLoading(true)
+        val pagerAdapter = MyPagerAdapter(supportFragmentManager)
+        val viewPager = findViewById<ViewPager>(R.id.view_pager)
+        val tabs = findViewById<TabLayout>(R.id.tabs)
+        tabs.setupWithViewPager(viewPager)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        repository.leagues.observe(this, Observer {
-            showLoading(false)
-            items = it.leagues
-            recyclerView.adapter = LigaAdapter(items) { league ->
-                startActivity<DetailActivity>(DetailActivity.EXTRA_LEAGUE to league)
-                println(league.idLeague)
-            }
-        })
+        viewPager.offscreenPageLimit = 3
+        viewPager.adapter = pagerAdapter
+
 
     }
 
-    private fun showLoading(state: Boolean) {
-        if (state) loading_overlay.visibility = View.VISIBLE
-        else loading_overlay.visibility = View.GONE
+    override fun onBackPressed() {
+        val builder =
+            AlertDialog.Builder(this, R.style.AlertDialogStyle)
+        builder.setMessage(getString(R.string.dialogexit))
+            .setPositiveButton(
+                getString(R.string.Yes)
+            ) { dialog: DialogInterface?, id: Int -> finishAffinity() }
+            .setNegativeButton(
+                getString(R.string.No)
+            ) { dialog: DialogInterface, id: Int -> dialog.cancel() }
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 
 }

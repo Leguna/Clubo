@@ -13,113 +13,65 @@ data class Matches(
 @Parcelize
 data class Match(
     @SerializedName("dateEvent")
-    val dateEvent: String?, // 2019-11-30
-    @SerializedName("dateEventLocal")
-    val dateEventLocal: String?, // 2019-11-23
+    var dateEvent: String? = "2019-11-30", // 2019-11-30
     @SerializedName("idAwayTeam")
-    val idAwayTeam: String?, // 133613
+    val idAwayTeam: String? = "", // 133613
     @SerializedName("idEvent")
-    val idEvent: String?, // 602266
+    var idEvent: String? = "", // 602266
     @SerializedName("idHomeTeam")
-    val idHomeTeam: String?, // 134777
+    val idHomeTeam: String? = "", // 134777
     @SerializedName("idLeague")
-    val idLeague: String?, // 4328
-    @SerializedName("idSoccerXML")
-    val idSoccerXML: String?, // 402117
+    val idLeague: String? = "", // 4328
     @SerializedName("intAwayScore")
-    val intAwayScore: String? = "0", // 3
-    @SerializedName("intAwayShots")
-    val intAwayShots: String?, // null
+    var intAwayScore: String? = "0", // 3
     @SerializedName("intHomeScore")
-    val intHomeScore: String? = "0", // 2
-    @SerializedName("intHomeShots")
-    val intHomeShots: String?, // null
+    var intHomeScore: String? = "0", // 2
     @SerializedName("intRound")
-    val intRound: String? = "0", // 14
-    @SerializedName("intSpectators")
-    val intSpectators: String?, // null
+    var intRound: String? = "0", // 14
     @SerializedName("strAwayFormation")
-    val strAwayFormation: String?, // null
+    val strAwayFormation: String? = "", // null
     @SerializedName("strAwayGoalDetails")
-    val strAwayGoalDetails: String?,
-    @SerializedName("strAwayLineupDefense")
-    val strAwayLineupDefense: String?,
-    @SerializedName("strAwayLineupForward")
-    val strAwayLineupForward: String?,
+    val strAwayGoalDetails: String? = "",
     @SerializedName("strAwayLineupGoalkeeper")
-    val strAwayLineupGoalkeeper: String?,
-    @SerializedName("strAwayLineupMidfield")
-    val strAwayLineupMidfield: String?,
-    @SerializedName("strAwayLineupSubstitutes")
-    val strAwayLineupSubstitutes: String?,
-    @SerializedName("strAwayRedCards")
-    val strAwayRedCards: String?,
+    val strAwayLineupGoalkeeper: String? = "",
     @SerializedName("strAwayTeam")
-    val strAwayTeam: String?, // Man City
-    @SerializedName("strAwayYellowCards")
-    val strAwayYellowCards: String?,
-    @SerializedName("strBanner")
-    val strBanner: String?, // null
-    @SerializedName("strCircuit")
-    val strCircuit: String?, // null
-    @SerializedName("strCity")
-    val strCity: String?, // null
+    val strAwayTeam: String? = "", // Man City
     @SerializedName("strCountry")
-    val strCountry: String?, // null
-    @SerializedName("strDate")
-    val strDate: String?, // 30/11/19
-    @SerializedName("strDescriptionEN")
-    val strDescriptionEN: String?,
+    val strCountry: String? = "", // null
     @SerializedName("strEvent")
-    val strEvent: String?, // Newcastle vs Man City
-    @SerializedName("strEventAlternate")
-    val strEventAlternate: String?, // Man City @ Newcastle
-    @SerializedName("strFanart")
-    val strFanart: String?, // null
-    @SerializedName("strFilename")
-    val strFilename: String?, // English Premier League 2019-11-30 Newcastle vs Man City
+    var strEvent: String? = "", // Newcastle vs Man City
     @SerializedName("strHomeFormation")
-    val strHomeFormation: String?, // null
+    val strHomeFormation: String? = "", // null
     @SerializedName("strHomeGoalDetails")
-    val strHomeGoalDetails: String?,
-    @SerializedName("strHomeLineupDefense")
-    val strHomeLineupDefense: String?,
-    @SerializedName("strHomeLineupForward")
-    val strHomeLineupForward: String?,
+    val strHomeGoalDetails: String? = "",
     @SerializedName("strHomeLineupGoalkeeper")
-    val strHomeLineupGoalkeeper: String?,
-    @SerializedName("strHomeLineupMidfield")
-    val strHomeLineupMidfield: String?,
-    @SerializedName("strHomeLineupSubstitutes")
-    val strHomeLineupSubstitutes: String?,
-    @SerializedName("strHomeRedCards")
-    val strHomeRedCards: String?,
+    val strHomeLineupGoalkeeper: String? = "",
     @SerializedName("strHomeTeam")
-    val strHomeTeam: String?, // Newcastle
-    @SerializedName("strHomeYellowCards")
-    val strHomeYellowCards: String?,
+    val strHomeTeam: String? = "", // Newcastle
     @SerializedName("strLeague")
-    val strLeague: String?, // English Premier League
-    @SerializedName("strLocked")
-    val strLocked: String?, // unlocked
-    @SerializedName("strMap")
-    val strMap: String?, // null
-    @SerializedName("strPoster")
-    val strPoster: String?, // null
-    @SerializedName("strResult")
-    val strResult: String?,
-    @SerializedName("strSeason")
-    val strSeason: String?, // 1920
+    val strLeague: String? = "", // English Premier League
     @SerializedName("strSport")
-    val strSport: String?, // Soccer
-    @SerializedName("strTVStation")
-    val strTVStation: String?, // null
-    @SerializedName("strThumb")
-    val strThumb: String?, // https://www.thesportsdb.com/images/media/event/thumb/e84qfr1574511008.jpg
+    val strSport: String? = "", // Soccer
     @SerializedName("strTime")
-    val strTime: String?, // 12:30:00
-    @SerializedName("strTimeLocal")
-    val strTimeLocal: String? // 13:30:00
-) : Parcelable
+    var strTime: String? = "", // 12:30:00
+
+    var strAwayPhoto: String? = "",
+    var strHomePhoto: String? = ""
+) : Parcelable {
+
+    companion object {
+        const val KEY_TABLE = "Matches"
+        const val KEY_ID = "idEvent"
+        const val KEY_NAME = "strEvent"
+        const val KEY_TIME = "strTime"
+        const val KEY_DATE = "dateEvent"
+        const val KEY_ROUND = "intRound"
+        const val KEY_PHOTO_AWAY = "strAwayPhoto"
+        const val KEY_PHOTO_HOME = "strHomePhoto"
+        const val KEY_SCORE_AWAY = "intAwayScore"
+        const val KEY_SCORE_HOME = "intHomeScore"
+    }
+
+}
 
 

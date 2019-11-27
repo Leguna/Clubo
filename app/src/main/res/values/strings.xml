@@ -1,18 +1,6 @@
 <resources>
     <string name="app_name">Clubo</string>
 
-    <string-array name="liga_image">
-        <item>@drawable/english_premier_league_1</item>
-        <item>@drawable/french_ligue_1</item>
-        <item>@drawable/german_bundesliga</item>
-        <item>@drawable/italian_serie_a</item>
-        <item>@drawable/spanish_la_liga</item>
-        <item>@drawable/american_mayor_league</item>
-        <item>@drawable/portugeuese_premiera_liga</item>
-        <item>@drawable/australian_a_league</item>
-        <item>@drawable/scotish_premier_league</item>
-        <item>@drawable/english_league_1</item>
-    </string-array>
 
     <string-array name="liga_id">
         <item>4328</item>
@@ -100,4 +88,14 @@
     <string name="prev_match">Prev Match</string>
     <string name="next_match">Next Match</string>
     <string name="search">Cari</string>
+    <string name="title_favorite">Favorite</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_clubo_main">CluboMainActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="dialogexit">Are you sure?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
 </resources>

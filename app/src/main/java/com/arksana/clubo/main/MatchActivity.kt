@@ -2,11 +2,13 @@ package com.arksana.clubo.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.arksana.clubo.R
+import com.arksana.clubo.data.AnkoSQL
 import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
 import com.bumptech.glide.Glide
@@ -20,6 +22,8 @@ class MatchActivity : AppCompatActivity() {
     }
 
     private val repository = Repository()
+    private var ankoSQL = AnkoSQL(applicationContext)
+    private lateinit var match: Match
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,9 @@ class MatchActivity : AppCompatActivity() {
 
         showLoading(true)
         repository.team.observe(this, Observer {
+            match.strHomePhoto = it[0].teams!![0]?.strTeamBadge
+            match.strAwayPhoto = it[1].teams!![0]?.strTeamBadge
+
             Glide.with(this)
                 .load(it[0].teams!![0]?.strTeamBadge)
                 .apply(RequestOptions().override(200, 300))
@@ -41,6 +48,7 @@ class MatchActivity : AppCompatActivity() {
                 .into(iv_badge2)
         })
         repository.matches.observe(this, Observer {
+            match = it.matches[0]
             setUI(it.matches[0])
             showLoading(false)
             val ids =
@@ -70,11 +78,42 @@ class MatchActivity : AppCompatActivity() {
         tv_goal2.text = match?.strAwayGoalDetails ?: "-"
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.fav, menu)
+        this.menu = menu!!
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             super.onBackPressed()
+        } else if (item.itemId == R.id.action_favorite) {
+            changeLoveColor(item)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private lateinit var menu: Menu
+    private var heartCondition = false
+    private fun changeLoveColor(item: MenuItem) {
+        heartCondition = !heartCondition
+        if (heartCondition) {
+            item.setIcon(R.drawable.ic_favorite)
+            ankoSQL.sqlLiteCreate(match)
+//            viewModel.dataRepository.filmDAO.insert(film)
+        } else {
+            item.setIcon(R.drawable.ic_favorite_border)
+            ankoSQL.sqlLiteDelete(match)
+//            viewModel.dataRepository.filmDAO.delete(film)
+
+        }
+    }
+
+    private fun heartCheck() {
+        val menuItem: MenuItem = menu.findItem(R.id.action_favorite)
+        heartCondition = ankoSQL.sqlLiteSelectID(match.idEvent.toString()).idEvent != null
+        val icon = if (heartCondition) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+        menuItem.setIcon(icon)
     }
 
     private fun showLoading(state: Boolean) {

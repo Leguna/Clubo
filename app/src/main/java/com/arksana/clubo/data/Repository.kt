@@ -10,7 +10,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class Repository : ViewModel() {
+class Repository() : ViewModel() {
 
     val leagues = MutableLiveData<Leagues>()
     val league = MutableLiveData<League>()
@@ -69,7 +69,6 @@ class Repository : ViewModel() {
     fun detailMatch(id: String) {
         service?.getDetailMatch(id)?.enqueue(object : Callback<Matches> {
             override fun onFailure(call: Call<Matches>, t: Throwable) {
-                println("LALA")
             }
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
@@ -77,7 +76,6 @@ class Repository : ViewModel() {
                 matches.postValue(data)
             }
         })
-        println("ID" + id)
     }
 
     fun search(query: String) {
@@ -89,12 +87,7 @@ class Repository : ViewModel() {
                 var data = response.body()
                 if (data?.matches == null) data = Matches(emptyList())
 
-                var list = ArrayList<Match>()
-                data.matches.forEach {
-                    if (it.strSport.equals("Soccer"))
-                        list.add(it)
-                }
-                matches.postValue(Matches(list))
+                matches.postValue(Matches(data.matches.filter { it.strSport == "Soccer" }))
             }
         })
     }
@@ -134,4 +127,6 @@ class Repository : ViewModel() {
             detailTeam(s, index)
         }
     }
+
+
 }
