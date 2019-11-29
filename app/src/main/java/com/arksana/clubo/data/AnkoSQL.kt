@@ -11,6 +11,7 @@ import com.arksana.clubo.data.Match.Companion.KEY_SCORE_AWAY
 import com.arksana.clubo.data.Match.Companion.KEY_SCORE_HOME
 import com.arksana.clubo.data.Match.Companion.KEY_TABLE
 import com.arksana.clubo.data.Match.Companion.KEY_TIME
+import com.arksana.clubo.utils.database
 import org.jetbrains.anko.db.*
 
 class AnkoSQL(val context: Context) {
@@ -54,7 +55,7 @@ class AnkoSQL(val context: Context) {
 
     fun sqlLiteSelectID(id: String) = context.database.use {
 
-        val result = select(KEY_TABLE).whereArgs("$KEY_TABLE = {idMatch}", "idMatch" to id).exec {
+        val result = select(KEY_TABLE).whereArgs("$KEY_ID = {idMatch}", "idMatch" to id).exec {
             parseList(classParser<Match>())
         }
 

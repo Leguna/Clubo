@@ -22,13 +22,14 @@ class MatchActivity : AppCompatActivity() {
     }
 
     private val repository = Repository()
-    private var ankoSQL = AnkoSQL(applicationContext)
+    private lateinit var ankoSQL: AnkoSQL
     private lateinit var match: Match
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match)
 
+        ankoSQL = AnkoSQL(applicationContext)
         title = "Detail Match"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -54,6 +55,7 @@ class MatchActivity : AppCompatActivity() {
             val ids =
                 arrayOf(it.matches[0].idHomeTeam.toString(), it.matches[0].idAwayTeam.toString())
             repository.allDetailTeam(ids)
+            heartCheck()
         })
 
         repository.detailMatch(intent.getStringExtra(EXTRA_IDMATCH)!!)
