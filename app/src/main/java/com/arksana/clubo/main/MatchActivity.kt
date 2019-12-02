@@ -29,7 +29,6 @@ class MatchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match)
-
         ankoSQL = AnkoSQL(MyDatabaseOpenHelper.getInstance(applicationContext))
         title = "Detail Match"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -112,7 +111,7 @@ class MatchActivity : AppCompatActivity() {
 
     private fun heartCheck(idEvent: String) {
         val menuItem: MenuItem = menu.findItem(R.id.action_favorite)
-        heartCondition = ankoSQL.sqlLiteSelectID(idEvent) == null
+        heartCondition = ankoSQL.sqlLiteSelectID(idEvent).size != 0
         val icon = if (heartCondition) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         menuItem.setIcon(icon)
     }

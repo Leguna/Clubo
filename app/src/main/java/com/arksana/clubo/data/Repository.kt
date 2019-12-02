@@ -10,7 +10,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class Repository() : ViewModel() {
+class Repository : ViewModel() {
 
     val leagues = MutableLiveData<Leagues>()
     val league = MutableLiveData<League>()

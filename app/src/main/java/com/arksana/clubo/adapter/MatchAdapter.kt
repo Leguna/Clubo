@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.item_match_list.view.*
 
 class MatchAdapter(
     private val owner: LifecycleOwner,
-    private var list: List<Match> = arrayListOf(),
+    private var list: List<Match>,
     val listener: (Match) -> Unit
 ) :
     RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
