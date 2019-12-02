@@ -46,7 +46,7 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) :
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Here you can upgrade tables, as usual
-        db.dropTable("User", true)
+        db.dropTable(KEY_TABLE, true)
     }
 }
 

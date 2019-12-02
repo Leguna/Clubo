@@ -1,6 +1,5 @@
 package com.arksana.clubo.data
 
-import android.content.Context
 import com.arksana.clubo.data.Match.Companion.KEY_DATE
 import com.arksana.clubo.data.Match.Companion.KEY_ID
 import com.arksana.clubo.data.Match.Companion.KEY_NAME
@@ -11,13 +10,12 @@ import com.arksana.clubo.data.Match.Companion.KEY_SCORE_AWAY
 import com.arksana.clubo.data.Match.Companion.KEY_SCORE_HOME
 import com.arksana.clubo.data.Match.Companion.KEY_TABLE
 import com.arksana.clubo.data.Match.Companion.KEY_TIME
-import com.arksana.clubo.utils.database
+import com.arksana.clubo.utils.MyDatabaseOpenHelper
 import org.jetbrains.anko.db.*
 
-class AnkoSQL(val context: Context) {
+class AnkoSQL(private val db: MyDatabaseOpenHelper) {
 
-
-    fun sqlLiteFindAll(): ArrayList<Match> = context.database.use {
+    fun sqlLiteFindAll(): ArrayList<Match> = db.use {
         val matches = ArrayList<Match>()
 
         select(KEY_TABLE)
@@ -53,16 +51,16 @@ class AnkoSQL(val context: Context) {
         matches
     }
 
-    fun sqlLiteSelectID(id: String) = context.database.use {
+    fun sqlLiteSelectID(id: String) = db.use {
 
         val result = select(KEY_TABLE).whereArgs("$KEY_ID = {idMatch}", "idMatch" to id).exec {
             parseList(classParser<Match>())
         }
 
-        result[0]
+        result
     }
 
-    fun sqlLiteCreate(match: Match) = context.database.use {
+    fun sqlLiteCreate(match: Match) = db.use {
         insert(
             KEY_TABLE,
             KEY_ID to match.idEvent,
@@ -77,6 +75,10 @@ class AnkoSQL(val context: Context) {
         )
     }
 
+    fun sqlLiteDelete(match: Match) = db.use {
+        delete(KEY_TABLE, "$KEY_ID = {matchId}", "matchId" to match.idEvent!!)
+    }
+
 //    fun sqlLiteUpdate(match: Match) = context.database.use {
 //        val updateResult = update(
 //            "Matches",
@@ -88,10 +90,5 @@ class AnkoSQL(val context: Context) {
 //
 //        Timber.d("Update result code is $updateResult")
 //    }
-
-    fun sqlLiteDelete(match: Match) = context.database.use {
-        delete(KEY_TABLE, "id = {matchId}", "matchId" to match.idEvent!!.toInt())
-    }
-
 
 }

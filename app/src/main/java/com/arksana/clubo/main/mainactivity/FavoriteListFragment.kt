@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.R
 import com.arksana.clubo.data.AnkoSQL
 import com.arksana.clubo.data.Match
+import com.arksana.clubo.utils.MyDatabaseOpenHelper
 import kotlinx.android.synthetic.main.fragment_league.*
 
 
@@ -29,10 +30,15 @@ class FavoriteListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ankoSQL = AnkoSQL(context!!)
+        ankoSQL = AnkoSQL(MyDatabaseOpenHelper.getInstance(context!!))
         recyclerView.layoutManager = LinearLayoutManager(context)
 
+        listMatch = ankoSQL.sqlLiteFindAll()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        listMatch = ankoSQL.sqlLiteFindAll()
     }
 
 

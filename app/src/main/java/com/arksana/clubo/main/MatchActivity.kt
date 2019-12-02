@@ -11,6 +11,7 @@ import com.arksana.clubo.R
 import com.arksana.clubo.data.AnkoSQL
 import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
+import com.arksana.clubo.utils.MyDatabaseOpenHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_match.*
@@ -29,7 +30,7 @@ class MatchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match)
 
-        ankoSQL = AnkoSQL(applicationContext)
+        ankoSQL = AnkoSQL(MyDatabaseOpenHelper.getInstance(applicationContext))
         title = "Detail Match"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -55,7 +56,7 @@ class MatchActivity : AppCompatActivity() {
             val ids =
                 arrayOf(it.matches[0].idHomeTeam.toString(), it.matches[0].idAwayTeam.toString())
             repository.allDetailTeam(ids)
-            heartCheck()
+            heartCheck(it.matches[0].idEvent!!)
         })
 
         repository.detailMatch(intent.getStringExtra(EXTRA_IDMATCH)!!)
@@ -102,18 +103,16 @@ class MatchActivity : AppCompatActivity() {
         if (heartCondition) {
             item.setIcon(R.drawable.ic_favorite)
             ankoSQL.sqlLiteCreate(match)
-//            viewModel.dataRepository.filmDAO.insert(film)
         } else {
             item.setIcon(R.drawable.ic_favorite_border)
             ankoSQL.sqlLiteDelete(match)
-//            viewModel.dataRepository.filmDAO.delete(film)
 
         }
     }
 
-    private fun heartCheck() {
+    private fun heartCheck(idEvent: String) {
         val menuItem: MenuItem = menu.findItem(R.id.action_favorite)
-        heartCondition = ankoSQL.sqlLiteSelectID(match.idEvent.toString()).idEvent != null
+        heartCondition = ankoSQL.sqlLiteSelectID(idEvent) == null
         val icon = if (heartCondition) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         menuItem.setIcon(icon)
     }

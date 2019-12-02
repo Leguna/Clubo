@@ -59,6 +59,9 @@ data class Match(
     var strHomePhoto: String? = ""
 ) : Parcelable {
 
+    constructor()
+
+
     companion object {
         const val KEY_TABLE = "Matches"
         const val KEY_ID = "idEvent"
