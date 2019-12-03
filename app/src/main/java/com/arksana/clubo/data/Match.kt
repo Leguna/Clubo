@@ -62,6 +62,8 @@ data class Match(
     companion object {
         const val KEY_TABLE = "Matches"
         const val KEY_ID = "idEvent"
+        const val KEY_HOME_TEAM = "idHomeTeam"
+        const val KEY_AWAY_TEAM = "idAwayTeam"
         const val KEY_NAME = "strEvent"
         const val KEY_TIME = "strTime"
         const val KEY_DATE = "dateEvent"

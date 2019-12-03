@@ -2,7 +2,9 @@ package com.arksana.clubo.utils
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import com.arksana.clubo.data.Match.Companion.KEY_AWAY_TEAM
 import com.arksana.clubo.data.Match.Companion.KEY_DATE
+import com.arksana.clubo.data.Match.Companion.KEY_HOME_TEAM
 import com.arksana.clubo.data.Match.Companion.KEY_ID
 import com.arksana.clubo.data.Match.Companion.KEY_NAME
 import com.arksana.clubo.data.Match.Companion.KEY_PHOTO_AWAY
@@ -15,7 +17,7 @@ import com.arksana.clubo.data.Match.Companion.KEY_TIME
 import org.jetbrains.anko.db.*
 
 class MyDatabaseOpenHelper private constructor(ctx: Context) :
-    ManagedSQLiteOpenHelper(ctx, "db-clubo", null, 1) {
+    ManagedSQLiteOpenHelper(ctx, "db-clubo", null, 2) {
     init {
         instance = this
     }
@@ -38,6 +40,8 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) :
             KEY_SCORE_AWAY to TEXT,
             KEY_PHOTO_HOME to TEXT,
             KEY_PHOTO_AWAY to TEXT,
+            KEY_HOME_TEAM to TEXT,
+            KEY_AWAY_TEAM to TEXT,
             KEY_DATE to TEXT,
             KEY_ROUND to TEXT,
             KEY_TIME to TEXT

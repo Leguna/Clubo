@@ -98,14 +98,18 @@ class MatchActivity : AppCompatActivity() {
     private lateinit var menu: Menu
     private var heartCondition = false
     private fun changeLoveColor(item: MenuItem) {
-        heartCondition = !heartCondition
-        if (heartCondition) {
-            item.setIcon(R.drawable.ic_favorite)
-            ankoSQL.sqlLiteCreate(match)
+        if (!isLoading) {
+            item.isEnabled = true
+            heartCondition = !heartCondition
+            if (heartCondition) {
+                item.setIcon(R.drawable.ic_favorite)
+                ankoSQL.sqlLiteCreate(match)
+            } else {
+                item.setIcon(R.drawable.ic_favorite_border)
+                ankoSQL.sqlLiteDelete(match)
+            }
         } else {
-            item.setIcon(R.drawable.ic_favorite_border)
-            ankoSQL.sqlLiteDelete(match)
-
+            item.isEnabled = false
         }
     }
 
@@ -116,7 +120,9 @@ class MatchActivity : AppCompatActivity() {
         menuItem.setIcon(icon)
     }
 
+    var isLoading: Boolean = true
     private fun showLoading(state: Boolean) {
+        isLoading = state
         if (state) loading_overlay.visibility = View.VISIBLE
         else loading_overlay.visibility = View.GONE
     }

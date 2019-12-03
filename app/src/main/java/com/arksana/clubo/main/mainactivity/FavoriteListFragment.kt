@@ -26,7 +26,6 @@ class FavoriteListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_league, container, false)
     }
 
@@ -37,7 +36,7 @@ class FavoriteListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         listMatch = ankoSQL.sqlLiteFindAll()
-        println(listMatch[0].strAwayPhoto + " : " + listMatch[0].strHomePhoto)
+
         recyclerView.adapter = MatchAdapter(this, listMatch) {
             val intent = Intent(context, MatchActivity::class.java)
             intent.putExtra(MatchActivity.EXTRA_IDMATCH, it.idEvent)
