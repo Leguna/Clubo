@@ -37,6 +37,7 @@
                     android:layout_height="match_parent"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
+                    android:contentDescription="@string/badge"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <LinearLayout
@@ -48,7 +49,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Formed" />
+                        android:text="@string/formed" />
 
                     <TextView
                         android:id="@+id/tv_formed"
@@ -56,12 +57,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="8dp"
-                        android:text="1992" />
+                        android:text="@string/formed_year" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Country" />
+                        android:text="@string/country" />
 
                     <TextView
                         android:id="@+id/tv_country"
@@ -69,12 +70,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="8dp"
-                        android:text="England" />
+                        android:text="@string/country_text" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Desc" />
+                        android:text="@string/desc" />
 
                     <TextView
                         android:id="@+id/tv_desc"
@@ -82,9 +83,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:lines="4"
-                        android:lineHeight="14dp"
-                        android:text="The Premier League (often referred to as the English Premier League (EPL) outside England), is the top level of the English football league system. Contested by 20 clubs, it operates on a system of promotion and relegation with the English Football League (EFL).\r\n\r\nThe Premier League is a corporation in which the member clubs act as shareholders. Seasons run from August to May with each team playing 38 matches (playing each other home and away). Most games are played on Saturday and Sunday afternoons. The Premier League has featured 47 English and two Welsh clubs since its inception, making it a cross-border league.\r\n\r\nThe competition was formed as the FA Premier League on 20 February 1992 following the decision of clubs in the Football League First Division to break away from the Football League, founded in 1888, and take advantage of a lucrative television rights deal. " />
+                        android:lines="3"
+                        android:text="@string/desc_example" />
                 </LinearLayout>
             </LinearLayout>
 

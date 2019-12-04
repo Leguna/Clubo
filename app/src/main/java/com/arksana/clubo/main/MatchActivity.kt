@@ -1,6 +1,5 @@
 package com.arksana.clubo.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_match.*
 class MatchActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_IDMATCH = "extra_idmatch"
+        const val EXTRA_IDMATCH = "extra_idMatch"
     }
 
     private val repository = Repository()
@@ -61,14 +60,12 @@ class MatchActivity : AppCompatActivity() {
         repository.detailMatch(intent.getStringExtra(EXTRA_IDMATCH)!!)
     }
 
-
-    @SuppressLint("SetTextI18n")
     private fun setUI(match: Match?) {
 
         tv_league.text = match?.strLeague
         tv_match.text = match?.strEvent
         tv_date.text = match?.dateEvent
-        tv_round.text = "Round " + match?.intRound
+        tv_round.text = String.format(resources.getString(R.string.round), match?.intRound)
         tv_time.text = match?.strTime
         tv_score.text = match?.intHomeScore ?: "0"
         tv_score2.text = match?.intAwayScore ?: "0"
@@ -115,12 +112,13 @@ class MatchActivity : AppCompatActivity() {
 
     private fun heartCheck(idEvent: String) {
         val menuItem: MenuItem = menu.findItem(R.id.action_favorite)
-        heartCondition = ankoSQL.sqlLiteSelectID(idEvent).size != 0
+        heartCondition = ankoSQL.sqlLiteSelectID(idEvent).isNotEmpty()
         val icon = if (heartCondition) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         menuItem.setIcon(icon)
     }
 
-    var isLoading: Boolean = true
+    private var isLoading: Boolean = true
+
     private fun showLoading(state: Boolean) {
         isLoading = state
         if (state) loading_overlay.visibility = View.VISIBLE
