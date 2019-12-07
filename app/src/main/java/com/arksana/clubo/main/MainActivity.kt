@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.offscreenPageLimit = 3
         viewPager.adapter = pagerAdapter
-
-
     }
 
     override fun onBackPressed() {
@@ -34,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         builder.setMessage(getString(R.string.dialogexit))
             .setPositiveButton(
                 getString(R.string.Yes)
-            ) { dialog: DialogInterface?, id: Int -> finishAffinity() }
+            ) { _: DialogInterface?, _: Int -> finishAffinity() }
             .setNegativeButton(
                 getString(R.string.No)
-            ) { dialog: DialogInterface, id: Int -> dialog.cancel() }
+            ) { dialog: DialogInterface, _: Int -> dialog.cancel() }
         val alertDialog = builder.create()
         alertDialog.show()
     }

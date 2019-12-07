@@ -1,32 +1,16 @@
 package com.arksana.clubo.data
 
 import org.junit.Test
+import org.mockito.Mockito.mock
 
 class RepositoryTest {
 
-
-    @Test
-    fun getLeagues() {
-    }
-
-    @Test
-    fun getLeague() {
-    }
-
-    @Test
-    fun getMatches() {
-    }
-
-    @Test
-    fun getTeams() {
-    }
-
-    @Test
-    fun getTeam() {
-    }
+    private val repository = mock(Repository::class.java)
 
     @Test
     fun listLeague() {
+
+
     }
 
     @Test
