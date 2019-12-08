@@ -68,6 +68,17 @@ dependencies {
     implementation "org.jetbrains.anko:anko-cardview-v7:$anko_version"
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
 
+    //Test
     testImplementation 'org.mockito:mockito-core:3.0.0'
-
+    testImplementation "android.arch.core:core-testing:1.1.1"
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    // Espresso dependencies
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
+    androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
 }

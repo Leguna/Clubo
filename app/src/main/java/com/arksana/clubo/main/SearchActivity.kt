@@ -46,7 +46,9 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun showLoading(state: Boolean) {
-        if (state) loading_overlay.visibility = View.VISIBLE
+        if (state) {
+            loading_overlay.visibility = View.VISIBLE
+        }
         else {
             loading_overlay.visibility = View.GONE
         }

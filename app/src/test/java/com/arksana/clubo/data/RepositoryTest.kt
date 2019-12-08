@@ -1,15 +1,19 @@
 package com.arksana.clubo.data
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.mock
 
 class RepositoryTest {
 
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
     private val repository = mock(Repository::class.java)
 
     @Test
     fun listLeague() {
-
 
     }
 
@@ -35,5 +39,6 @@ class RepositoryTest {
 
     @Test
     fun allDetailTeam() {
+
     }
 }
