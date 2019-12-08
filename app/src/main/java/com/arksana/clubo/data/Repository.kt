@@ -11,7 +11,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class Repository : ViewModel() {
+open class Repository : ViewModel() {
 
     val leagues = MutableLiveData<Leagues>()
     val league = MutableLiveData<League>()
@@ -34,7 +34,6 @@ class Repository : ViewModel() {
                     EspressoIdlingResource.decrement()
                 }
             }
-
             override fun onFailure(call: Call<Leagues>, error: Throwable) {
                 println("ListLeague Error")
                 EspressoIdlingResource.decrement()
@@ -103,7 +102,6 @@ class Repository : ViewModel() {
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
                 if (data?.matches == null) data = Matches(emptyList())
-
                 matches.postValue(Matches(data.matches.filter { it.strSport == "Soccer" }))
                 EspressoIdlingResource.decrement()
             }
@@ -118,6 +116,8 @@ class Repository : ViewModel() {
                     val data = response.body()
                     league.postValue(data?.leagues?.get(0))
                 }
+
+                println("DetailLeague:" + call.request().url())
                 EspressoIdlingResource.decrement()
             }
 
@@ -148,9 +148,9 @@ class Repository : ViewModel() {
         })
     }
 
-    fun allDetailTeam(id: Array<String>) {
-        id.forEachIndexed { index, s ->
-            detailTeam(s, index)
+    fun allDetailTeam(ids: Array<String>) {
+        ids.forEachIndexed { index, id ->
+            detailTeam(id, index)
         }
     }
 
