@@ -10,9 +10,8 @@ import com.arksana.clubo.data.Match.Companion.KEY_PHOTO_HOME
 import com.arksana.clubo.data.Match.Companion.KEY_ROUND
 import com.arksana.clubo.data.Match.Companion.KEY_SCORE_AWAY
 import com.arksana.clubo.data.Match.Companion.KEY_SCORE_HOME
-import com.arksana.clubo.data.Match.Companion.KEY_TABLE
 import com.arksana.clubo.data.Match.Companion.KEY_TIME
-import com.arksana.clubo.utils.MyDatabaseOpenHelper
+import com.arksana.clubo.data.Match.Companion.MATCH_TABLE
 import com.arksana.clubo.utils.MyRowParser
 import org.jetbrains.anko.db.*
 
@@ -21,7 +20,7 @@ class AnkoSQL(private val db: MyDatabaseOpenHelper) {
     fun sqlLiteFindAll(): ArrayList<Match> = db.use {
         val matches = ArrayList<Match>()
 
-        select(KEY_TABLE)
+        select(MATCH_TABLE)
             .parseList(object : MapRowParser<List<Match>> {
                 override fun parseRow(columns: Map<String, Any?>): List<Match> {
                     val match = Match(
@@ -50,7 +49,7 @@ class AnkoSQL(private val db: MyDatabaseOpenHelper) {
 
     fun sqlLiteSelectID(id: String) = db.use {
 
-        val result = select(KEY_TABLE)
+        val result = select(MATCH_TABLE)
             .whereArgs("$KEY_ID = {idMatch}", "idMatch" to id)
             .exec { parseList(MyRowParser()) }
 
@@ -59,7 +58,7 @@ class AnkoSQL(private val db: MyDatabaseOpenHelper) {
 
     fun sqlLiteCreate(match: Match) = db.use {
         insert(
-            KEY_TABLE,
+            MATCH_TABLE,
             KEY_ID to match.idEvent,
             KEY_NAME to match.strEvent,
             KEY_PHOTO_HOME to match.strHomePhoto,
@@ -74,8 +73,8 @@ class AnkoSQL(private val db: MyDatabaseOpenHelper) {
         )
     }
 
-    fun sqlLiteDelete(match: Match) = db.use {
-        delete(KEY_TABLE, "$KEY_ID = {matchId}", "matchId" to match.idEvent!!)
+    fun matchDelete(match: Match) = db.use {
+        delete(MATCH_TABLE, "$KEY_ID = {matchId}", "matchId" to match.idEvent!!)
     }
 
 }

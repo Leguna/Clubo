@@ -7,19 +7,28 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.arksana.clubo.R
 
 private val TAB_TITLES = arrayOf(
-    R.string.prev_match,
-    R.string.next_match
+    R.string.match, R.string.standings, R.string.team
 )
 
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
+    private val pages = listOf(
+        MatchFragment(),
+        StandingsFragment(),
+        TeamFragment()
+    )
+
     override fun getItem(position: Int): Fragment {
-        return LeagueDetailFragment.newInstance(position + 1)
+        return pages[position]
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return context.resources.getString(TAB_TITLES[position])
+        return when (position) {
+            0 -> "Match"
+            1 -> "Standings"
+            else -> "Team"
+        }
     }
 
     override fun getCount(): Int {

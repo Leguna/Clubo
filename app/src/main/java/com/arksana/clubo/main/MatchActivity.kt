@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import com.arksana.clubo.R
 import com.arksana.clubo.data.AnkoSQL
 import com.arksana.clubo.data.Match
+import com.arksana.clubo.data.MyDatabaseOpenHelper
 import com.arksana.clubo.data.Repository
-import com.arksana.clubo.utils.MyDatabaseOpenHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_match.*
@@ -65,7 +65,7 @@ class MatchActivity : AppCompatActivity() {
         tv_league.text = match?.strLeague
         tv_match.text = match?.strEvent
         tv_date.text = match?.dateEvent
-        tv_round.text = String.format(resources.getString(R.string.round), match?.intRound)
+        tv_round.text = String.format(resources.getString(R.string.round) + match?.intRound)
         tv_time.text = match?.strTime
         tv_score.text = match?.intHomeScore ?: "0"
         tv_score2.text = match?.intAwayScore ?: "0"
@@ -103,7 +103,7 @@ class MatchActivity : AppCompatActivity() {
                 ankoSQL.sqlLiteCreate(match)
             } else {
                 item.setIcon(R.drawable.ic_favorite_border)
-                ankoSQL.sqlLiteDelete(match)
+                ankoSQL.matchDelete(match)
             }
         } else {
             item.isEnabled = false

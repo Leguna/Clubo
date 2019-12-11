@@ -2,10 +2,8 @@ package com.arksana.clubo.main
 
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.arksana.clubo.R
@@ -16,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_league.*
-import org.jetbrains.anko.startActivity
 
 
 class DetailActivity : AppCompatActivity() {
@@ -69,27 +66,27 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.list_menu, menu)
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.list_menu, menu)
 
-        val searchView: SearchView =
-            toolbar.menu.findItem(R.id.action_search).actionView as SearchView
+//        val searchView: SearchView =
+//            toolbar.menu.findItem(R.id.action_search).actionView as SearchView
+//
+//        searchView.queryHint = resources.getString(R.string.search)
+//        searchView.setOnQueryTextListener(object :
+//            SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String): Boolean {
+//                if (query.isNotEmpty())
+//                    startActivity<SearchActivity>(SearchActivity.EXTRA_QUERY to query)
+//                return true
+//            }
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                return false
+//            }
+//        })
 
-        searchView.queryHint = resources.getString(R.string.search)
-        searchView.setOnQueryTextListener(object :
-            SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.isNotEmpty())
-                    startActivity<SearchActivity>(SearchActivity.EXTRA_QUERY to query)
-                return true
-            }
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
-
-        return super.onCreateOptionsMenu(menu)
-    }
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

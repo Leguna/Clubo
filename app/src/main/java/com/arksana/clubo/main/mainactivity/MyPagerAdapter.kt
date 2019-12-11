@@ -5,8 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(
-    fm,
-    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
 
     private val pages = listOf(

@@ -60,7 +60,7 @@ data class Match(
 ) : Parcelable {
 
     companion object {
-        const val KEY_TABLE = "Matches"
+        const val MATCH_TABLE = "Matches"
         const val KEY_ID = "idEvent"
         const val KEY_HOME_TEAM = "idHomeTeam"
         const val KEY_AWAY_TEAM = "idAwayTeam"

@@ -17,6 +17,8 @@ open class Repository : ViewModel() {
     val league = MutableLiveData<League>()
 
     val matches = MutableLiveData<Matches>()
+    val matches2 = MutableLiveData<Matches>()
+    val matches3 = MutableLiveData<Matches>()
 
     val teams = ArrayList<Teams>(listOf(null, null))
     val team = MutableLiveData<ArrayList<Teams>>()
@@ -70,7 +72,7 @@ open class Repository : ViewModel() {
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
                 if (data?.matches == null) data = Matches(emptyList())
-                matches.postValue(data)
+                matches2.postValue(data)
                 EspressoIdlingResource.decrement()
             }
         })
@@ -102,7 +104,7 @@ open class Repository : ViewModel() {
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
                 if (data?.matches == null) data = Matches(emptyList())
-                matches.postValue(Matches(data.matches.filter { it.strSport == "Soccer" }))
+                matches3.postValue(Matches(data.matches.filter { it.strSport == "Soccer" }))
                 EspressoIdlingResource.decrement()
             }
         })
