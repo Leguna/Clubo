@@ -2,6 +2,7 @@ package com.arksana.clubo.utils
 
 import com.arksana.clubo.model.Leagues
 import com.arksana.clubo.model.Matches
+import com.arksana.clubo.model.Standings
 import com.arksana.clubo.model.Teams
 import retrofit2.Call
 import retrofit2.http.GET
@@ -28,6 +29,12 @@ interface RetrofitInterface {
     @GET("searchevents.php?")
     fun getSearch(@Query("e") query: String): Call<Matches>
 
+    @GET("lookup_all_teams.php?")
+    fun getTeamList(@Query("id") id: String): Call<Teams>
+
     @GET("lookupteam.php?")
     fun getTeam(@Query("id") id: String): Call<Teams>
+
+    @GET("lookuptable.php?")
+    fun getStandings(@Query("l") id: String): Call<Standings>
 }

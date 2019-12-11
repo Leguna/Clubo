@@ -2,10 +2,7 @@ package com.arksana.clubo.data
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.arksana.clubo.model.League
-import com.arksana.clubo.model.Leagues
-import com.arksana.clubo.model.Matches
-import com.arksana.clubo.model.Teams
+import com.arksana.clubo.model.*
 import com.arksana.clubo.utils.EspressoIdlingResource
 import com.arksana.clubo.utils.RetrofitClientInstance
 import com.arksana.clubo.utils.RetrofitInterface
@@ -16,6 +13,8 @@ import retrofit2.Retrofit
 
 
 open class Repository : ViewModel() {
+
+    val standing = MutableLiveData<Standings>()
 
     val leagues = MutableLiveData<Leagues>()
     val league = MutableLiveData<League>()
@@ -45,6 +44,7 @@ open class Repository : ViewModel() {
                     EspressoIdlingResource.decrement()
                 }
             }
+
             override fun onFailure(call: Call<Leagues>, error: Throwable) {
                 println("ListLeague Error")
                 EspressoIdlingResource.decrement()
@@ -140,7 +140,7 @@ open class Repository : ViewModel() {
         })
     }
 
-    private fun detailTeam(id: String) {
+    fun detailTeam(id: String) {
         EspressoIdlingResource.increment()
         service?.getTeam(id)?.enqueue(object : Callback<Teams> {
             override fun onFailure(call: Call<Teams>, t: Throwable) {
@@ -151,8 +151,7 @@ open class Repository : ViewModel() {
                 if (response.isSuccessful) {
                     val data = response.body()
                     teams.add(data!!)
-                    if (teams.size > 1)
-                        team.postValue(teams)
+                    team.postValue(teams)
                 }
                 EspressoIdlingResource.decrement()
             }
@@ -162,11 +161,58 @@ open class Repository : ViewModel() {
 
     fun allDetailTeam(ids: Array<String>) {
         ids.forEachIndexed { _, id ->
-            detailTeam(id)
+            EspressoIdlingResource.increment()
+            service?.getTeam(id)?.enqueue(object : Callback<Teams> {
+                override fun onFailure(call: Call<Teams>, t: Throwable) {
+                    EspressoIdlingResource.decrement()
+                }
+
+                override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        teams.add(data!!)
+                        if (teams.size > 1)
+                            team.postValue(teams)
+                    }
+                    EspressoIdlingResource.decrement()
+                }
+
+            })
         }
     }
 
     fun standings(id: String) {
+        EspressoIdlingResource.increment()
+        service?.getStandings(id)?.enqueue(object : Callback<Standings> {
+            override fun onFailure(call: Call<Standings>, t: Throwable) {
+                EspressoIdlingResource.decrement()
+            }
 
+            override fun onResponse(call: Call<Standings>, response: Response<Standings>) {
+                EspressoIdlingResource.decrement()
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    standing.postValue(data)
+                }
+            }
+        })
+    }
+
+    fun listTeam(id: String) {
+        EspressoIdlingResource.increment()
+        service?.getTeamList(id)?.enqueue(object : Callback<Teams> {
+            override fun onFailure(call: Call<Teams>, t: Throwable) {
+                EspressoIdlingResource.decrement()
+            }
+
+            override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    teams.add(data!!)
+                    team.postValue(teams)
+                }
+                EspressoIdlingResource.decrement()
+            }
+        })
     }
 }

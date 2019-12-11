@@ -3,12 +3,12 @@ package com.arksana.clubo.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Standing(
+data class Standings(
     @SerializedName("table")
-    val table: List<Table?>? = null
+    val standings: List<Standing?>? = null
 )
 
-data class Table(
+data class Standing(
     @SerializedName("name")
     val name: String? = null, // New York Knicks
     @SerializedName("teamid")
