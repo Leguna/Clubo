@@ -24,7 +24,7 @@ open class Repository : ViewModel() {
     val matches2 = MutableLiveData<Matches>()
     val matches3 = MutableLiveData<Matches>()
 
-    val teams = ArrayList<Teams>(listOf(null, null))
+    val teams = ArrayList<Teams>()
     val team = MutableLiveData<ArrayList<Teams>>()
 
     private val retrofit: Retrofit? = RetrofitClientInstance.retrofitInstance
@@ -35,7 +35,12 @@ open class Repository : ViewModel() {
         service?.getListLeague()?.enqueue(object : Callback<Leagues> {
             override fun onResponse(call: Call<Leagues>, response: Response<Leagues>) {
                 if (response.isSuccessful) {
-                    val data = response.body()
+                    var data = response.body()
+                    println(data?.leagues?.get(0)?.strComplete)
+                    data = Leagues(data?.leagues?.filter {
+                        it.strComplete == "yes"
+                    }!!)
+                    println("DetailLeague:" + call.request().url())
                     leagues.postValue(data)
                     EspressoIdlingResource.decrement()
                 }
@@ -125,8 +130,6 @@ open class Repository : ViewModel() {
                     val data = response.body()
                     league.postValue(data?.leagues?.get(0))
                 }
-
-                println("DetailLeague:" + call.request().url())
                 EspressoIdlingResource.decrement()
             }
 
@@ -137,7 +140,7 @@ open class Repository : ViewModel() {
         })
     }
 
-    private fun detailTeam(id: String, index: Int) {
+    private fun detailTeam(id: String) {
         EspressoIdlingResource.increment()
         service?.getTeam(id)?.enqueue(object : Callback<Teams> {
             override fun onFailure(call: Call<Teams>, t: Throwable) {
@@ -147,8 +150,8 @@ open class Repository : ViewModel() {
             override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
                 if (response.isSuccessful) {
                     val data = response.body()
-                    teams[index] = data!!
-                    if (teams[0] != null && teams[1] != null)
+                    teams.add(data!!)
+                    if (teams.size > 1)
                         team.postValue(teams)
                 }
                 EspressoIdlingResource.decrement()
@@ -158,10 +161,12 @@ open class Repository : ViewModel() {
     }
 
     fun allDetailTeam(ids: Array<String>) {
-        ids.forEachIndexed { index, id ->
-            detailTeam(id, index)
+        ids.forEachIndexed { _, id ->
+            detailTeam(id)
         }
     }
 
+    fun standings(id: String) {
 
+    }
 }
