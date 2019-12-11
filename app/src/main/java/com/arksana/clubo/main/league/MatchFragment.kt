@@ -81,8 +81,8 @@ class MatchFragment : Fragment() {
                 }
                 return false
             }
-
         })
+
         recyclerView3.layoutManager = LinearLayoutManager(context)
         repository.matches3.observe(this, Observer {
             items3 = ArrayList(it.matches)

@@ -31,7 +31,7 @@ class StandingsFragment : Fragment() {
 
     private val repository = Repository()
     private lateinit var id: String
-    private lateinit var items: ArrayList<Standing?>
+    private var items: ArrayList<Standing?>? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +41,9 @@ class StandingsFragment : Fragment() {
         showLoading(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
         repository.standing.observe(this, Observer {
-            items = arrayListOf(it.standings?.get(0))
+            if (!it.standings?.isNullOrEmpty()!!)
+                items = arrayListOf(it.standings[0])
+
             recyclerView.adapter = StandingAdapter(this, it.standings) { id ->
                 val intent = Intent(context, TeamActivity::class.java)
                 intent.putExtra(TeamActivity.EXTRA_IDTEAM, id)
@@ -58,7 +60,7 @@ class StandingsFragment : Fragment() {
         } else {
             standings.visible()
             loading_overlay.gone()
-            if (items.size == 0) {
+            if (items.isNullOrEmpty()) {
                 text_overlay.visible()
                 standings.gone()
             }

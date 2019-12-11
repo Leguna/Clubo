@@ -33,7 +33,7 @@ class LigaAdapter(private var list: List<League> = arrayListOf(), val listener: 
         val league = list[position]
         Glide.with(holder.itemView.context)
             .load(league.strBadge)
-            .apply(RequestOptions().override(200, 300))
+            .apply(RequestOptions().override(200, 200))
             .into(holder.ivLogo)
         holder.tvTitle.text = league.strLeague
         holder.tvDesc.text = "${league.strDescriptionEN}"

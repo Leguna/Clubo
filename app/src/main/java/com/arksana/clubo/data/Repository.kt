@@ -185,6 +185,7 @@ open class Repository : ViewModel() {
         EspressoIdlingResource.increment()
         service?.getStandings(id)?.enqueue(object : Callback<Standings> {
             override fun onFailure(call: Call<Standings>, t: Throwable) {
+                standing.postValue(Standings(listOf()))
                 EspressoIdlingResource.decrement()
             }
 

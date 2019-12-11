@@ -45,11 +45,11 @@ class MatchAdapter(
         repository.allDetailTeam(ids)
         repository.team.observe(owner, Observer {
             Glide.with(holder.itemView)
-                .load(it[0].teams!![0]?.strTeamBadge)
+                .load(it[0].teams[0].strTeamBadge)
                 .apply(RequestOptions().override(200, 300))
                 .into(holder.badge)
             Glide.with(holder.itemView)
-                .load(it[1].teams!![0]?.strTeamBadge)
+                .load(it[1].teams[0].strTeamBadge)
                 .apply(RequestOptions().override(200, 300))
                 .into(holder.badge2)
         })

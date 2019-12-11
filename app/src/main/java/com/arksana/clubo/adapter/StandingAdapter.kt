@@ -45,7 +45,7 @@ class StandingAdapter(
             val team: Team = it[0].teams[0]
             Glide.with(view)
                 .load(team.strTeamBadge)
-                .apply(RequestOptions().override(200, 300))
+                .apply(RequestOptions().override(50, 50))
                 .into(view.iv_badge)
         })
         view.tv_name.text = standing.name.toString()
