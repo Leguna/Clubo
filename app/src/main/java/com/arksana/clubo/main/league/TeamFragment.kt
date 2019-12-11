@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.arksana.clubo.R
+import com.arksana.clubo.data.Repository
 
 class TeamFragment : Fragment() {
+
+    private val repository = Repository()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

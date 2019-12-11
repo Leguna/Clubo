@@ -83,4 +83,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
     androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
     implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
+    //Table
+    implementation 'com.evrencoskun.library:tableview:0.8.8'
 }

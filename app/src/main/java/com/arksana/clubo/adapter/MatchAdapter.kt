@@ -9,11 +9,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.clubo.R
-import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
+import com.arksana.clubo.model.Match
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_match_list.view.*

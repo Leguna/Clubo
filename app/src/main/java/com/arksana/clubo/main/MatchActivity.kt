@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.arksana.clubo.R
 import com.arksana.clubo.data.AnkoSQL
-import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.MyDatabaseOpenHelper
 import com.arksana.clubo.data.Repository
+import com.arksana.clubo.model.Match
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_match.*

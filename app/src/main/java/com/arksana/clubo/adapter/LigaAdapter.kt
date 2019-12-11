@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.clubo.R
 
-import com.arksana.clubo.data.League
+import com.arksana.clubo.model.League
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_league_list.view.*

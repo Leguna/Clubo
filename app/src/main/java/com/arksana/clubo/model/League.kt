@@ -1,4 +1,4 @@
-package com.arksana.clubo.data
+package com.arksana.clubo.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -9,7 +9,6 @@ data class Leagues(
     @SerializedName("leagues", alternate = ["countrys"])
         val leagues: List<League>
 )
-
 
 @Parcelize
 data class League(

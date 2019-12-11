@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arksana.clubo.R
 import com.arksana.clubo.adapter.MatchAdapter
 import com.arksana.clubo.data.AnkoSQL
-import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.MyDatabaseOpenHelper
 import com.arksana.clubo.main.MatchActivity
+import com.arksana.clubo.model.Match
 import kotlinx.android.synthetic.main.fragment_league.*
 
 

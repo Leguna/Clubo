@@ -1,8 +1,8 @@
 package com.arksana.clubo.utils
 
-import com.arksana.clubo.data.Leagues
-import com.arksana.clubo.data.Matches
-import com.arksana.clubo.data.Teams
+import com.arksana.clubo.model.Leagues
+import com.arksana.clubo.model.Matches
+import com.arksana.clubo.model.Teams
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

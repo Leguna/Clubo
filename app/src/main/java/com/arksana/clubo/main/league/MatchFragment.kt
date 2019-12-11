@@ -11,10 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.R
 import com.arksana.clubo.adapter.MatchAdapter
-import com.arksana.clubo.data.Match
 import com.arksana.clubo.data.Repository
 import com.arksana.clubo.main.DetailActivity
 import com.arksana.clubo.main.MatchActivity
+import com.arksana.clubo.model.Match
 import com.arksana.clubo.utils.gone
 import com.arksana.clubo.utils.visible
 import kotlinx.android.synthetic.main.fragment_league.*

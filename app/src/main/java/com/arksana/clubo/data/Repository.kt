@@ -2,6 +2,10 @@ package com.arksana.clubo.data
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.arksana.clubo.model.League
+import com.arksana.clubo.model.Leagues
+import com.arksana.clubo.model.Matches
+import com.arksana.clubo.model.Teams
 import com.arksana.clubo.utils.EspressoIdlingResource
 import com.arksana.clubo.utils.RetrofitClientInstance
 import com.arksana.clubo.utils.RetrofitInterface
@@ -54,7 +58,8 @@ open class Repository : ViewModel() {
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
 
-                if (data?.matches == null) data = Matches(emptyList())
+                if (data?.matches == null) data =
+                    Matches(emptyList())
                 matches.postValue(data)
                 EspressoIdlingResource.decrement()
             }
@@ -71,7 +76,8 @@ open class Repository : ViewModel() {
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
-                if (data?.matches == null) data = Matches(emptyList())
+                if (data?.matches == null) data =
+                    Matches(emptyList())
                 matches2.postValue(data)
                 EspressoIdlingResource.decrement()
             }
@@ -103,7 +109,8 @@ open class Repository : ViewModel() {
 
             override fun onResponse(call: Call<Matches>, response: Response<Matches>) {
                 var data = response.body()
-                if (data?.matches == null) data = Matches(emptyList())
+                if (data?.matches == null) data =
+                    Matches(emptyList())
                 matches3.postValue(Matches(data.matches.filter { it.strSport == "Soccer" }))
                 EspressoIdlingResource.decrement()
             }

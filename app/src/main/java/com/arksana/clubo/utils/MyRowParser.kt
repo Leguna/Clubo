@@ -1,15 +1,15 @@
 package com.arksana.clubo.utils
 
-import com.arksana.clubo.data.Match
-import com.arksana.clubo.data.Match.Companion.KEY_DATE
-import com.arksana.clubo.data.Match.Companion.KEY_ID
-import com.arksana.clubo.data.Match.Companion.KEY_NAME
-import com.arksana.clubo.data.Match.Companion.KEY_PHOTO_AWAY
-import com.arksana.clubo.data.Match.Companion.KEY_PHOTO_HOME
-import com.arksana.clubo.data.Match.Companion.KEY_ROUND
-import com.arksana.clubo.data.Match.Companion.KEY_SCORE_AWAY
-import com.arksana.clubo.data.Match.Companion.KEY_SCORE_HOME
-import com.arksana.clubo.data.Match.Companion.KEY_TIME
+import com.arksana.clubo.model.Match
+import com.arksana.clubo.model.Match.Companion.KEY_DATE
+import com.arksana.clubo.model.Match.Companion.KEY_ID
+import com.arksana.clubo.model.Match.Companion.KEY_NAME
+import com.arksana.clubo.model.Match.Companion.KEY_PHOTO_AWAY
+import com.arksana.clubo.model.Match.Companion.KEY_PHOTO_HOME
+import com.arksana.clubo.model.Match.Companion.KEY_ROUND
+import com.arksana.clubo.model.Match.Companion.KEY_SCORE_AWAY
+import com.arksana.clubo.model.Match.Companion.KEY_SCORE_HOME
+import com.arksana.clubo.model.Match.Companion.KEY_TIME
 import org.jetbrains.anko.db.MapRowParser
 
 class MyRowParser : MapRowParser<Match> {

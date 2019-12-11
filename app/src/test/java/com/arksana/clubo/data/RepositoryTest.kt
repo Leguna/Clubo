@@ -3,6 +3,8 @@ package com.arksana.clubo.data
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.arksana.clubo.model.Leagues
+import com.arksana.clubo.model.Matches
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

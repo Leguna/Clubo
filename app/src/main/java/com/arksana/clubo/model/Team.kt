@@ -1,4 +1,4 @@
-package com.arksana.clubo.data
+package com.arksana.clubo.model
 
 import com.google.gson.annotations.SerializedName
 

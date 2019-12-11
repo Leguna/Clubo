@@ -1,5 +1,8 @@
 package com.arksana.clubo.data;
 
+import com.arksana.clubo.model.Leagues;
+import com.arksana.clubo.model.Matches;
+import com.arksana.clubo.model.Teams;
 import com.google.gson.Gson;
 
 class GetData {

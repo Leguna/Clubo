@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arksana.clubo.R
 import com.arksana.clubo.adapter.LigaAdapter
-import com.arksana.clubo.data.League
 import com.arksana.clubo.data.Repository
 import com.arksana.clubo.main.DetailActivity
+import com.arksana.clubo.model.League
 import kotlinx.android.synthetic.main.fragment_league_list.*
 
 class LeagueListFragment : Fragment() {
