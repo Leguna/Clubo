@@ -16,7 +16,7 @@ import java.util.*
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var timer: Timer
-    private val waktu = 2000
+    private val time = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
             }
-        }, waktu.toLong())
+        }, time.toLong())
 
         val animation1 = AlphaAnimation(0.2f, 1.0f)
         animation1.duration = 2000

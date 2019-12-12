@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitClientInstance {
     companion object {
-        private val BASE_URL = BuildConfig.BASE_URL
+        private const val BASE_URL = BuildConfig.BASE_URL
         private var retrofit: Retrofit? = null
         val retrofitInstance: Retrofit?
             get() {

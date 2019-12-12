@@ -14,10 +14,16 @@ import com.arksana.clubo.model.Match.Companion.KEY_SCORE_AWAY
 import com.arksana.clubo.model.Match.Companion.KEY_SCORE_HOME
 import com.arksana.clubo.model.Match.Companion.KEY_TIME
 import com.arksana.clubo.model.Match.Companion.MATCH_TABLE
+import com.arksana.clubo.model.Team.Companion.TEAM_BADGE
+import com.arksana.clubo.model.Team.Companion.TEAM_COUNTRY
+import com.arksana.clubo.model.Team.Companion.TEAM_DESC
+import com.arksana.clubo.model.Team.Companion.TEAM_ID
+import com.arksana.clubo.model.Team.Companion.TEAM_NAME
+import com.arksana.clubo.model.Team.Companion.TEAM_TABLE
 import org.jetbrains.anko.db.*
 
 class MyDatabaseOpenHelper private constructor(ctx: Context) :
-    ManagedSQLiteOpenHelper(ctx, "db-clubo", null, 2) {
+    ManagedSQLiteOpenHelper(ctx, "db-clubo", null, 4) {
     init {
         instance = this
     }
@@ -46,11 +52,19 @@ class MyDatabaseOpenHelper private constructor(ctx: Context) :
             KEY_ROUND to TEXT,
             KEY_TIME to TEXT
         )
+        db.createTable(
+            TEAM_TABLE, true,
+            TEAM_ID to INTEGER + PRIMARY_KEY + UNIQUE,
+            TEAM_NAME to TEXT,
+            TEAM_COUNTRY to TEXT,
+            TEAM_DESC to TEXT,
+            TEAM_BADGE to TEXT
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Here you can upgrade tables, as usual
         db.dropTable(MATCH_TABLE, true)
+        db.dropTable(TEAM_TABLE, true)
     }
 }
 

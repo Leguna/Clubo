@@ -13,12 +13,20 @@ import com.arksana.clubo.model.Match.Companion.KEY_SCORE_AWAY
 import com.arksana.clubo.model.Match.Companion.KEY_SCORE_HOME
 import com.arksana.clubo.model.Match.Companion.KEY_TIME
 import com.arksana.clubo.model.Match.Companion.MATCH_TABLE
-import com.arksana.clubo.utils.MyRowParser
+import com.arksana.clubo.model.Team
+import com.arksana.clubo.model.Team.Companion.TEAM_BADGE
+import com.arksana.clubo.model.Team.Companion.TEAM_COUNTRY
+import com.arksana.clubo.model.Team.Companion.TEAM_DESC
+import com.arksana.clubo.model.Team.Companion.TEAM_ID
+import com.arksana.clubo.model.Team.Companion.TEAM_NAME
+import com.arksana.clubo.model.Team.Companion.TEAM_TABLE
+import com.arksana.clubo.utils.MatchesParser
+import com.arksana.clubo.utils.TeamsParser
 import org.jetbrains.anko.db.*
 
 class AnkoSQL(private val db: MyDatabaseOpenHelper) {
 
-    fun sqlLiteFindAll(): ArrayList<Match> = db.use {
+    fun findAllMatchFavorite(): ArrayList<Match> = db.use {
         val matches = ArrayList<Match>()
 
         select(MATCH_TABLE)
@@ -48,16 +56,15 @@ class AnkoSQL(private val db: MyDatabaseOpenHelper) {
         matches
     }
 
-    fun sqlLiteSelectID(id: String) = db.use {
-
+    fun matchSelect(id: String) = db.use {
         val result = select(MATCH_TABLE)
             .whereArgs("$KEY_ID = {idMatch}", "idMatch" to id)
-            .exec { parseList(MyRowParser()) }
+            .exec { parseList(MatchesParser()) }
 
         result
     }
 
-    fun sqlLiteCreate(match: Match) = db.use {
+    fun insertMatch(match: Match) = db.use {
         insert(
             MATCH_TABLE,
             KEY_ID to match.idEvent,
@@ -76,6 +83,50 @@ class AnkoSQL(private val db: MyDatabaseOpenHelper) {
 
     fun matchDelete(match: Match) = db.use {
         delete(MATCH_TABLE, "$KEY_ID = {matchId}", "matchId" to match.idEvent!!)
+    }
+
+    fun findAllTeamFavorite(): ArrayList<Team> = db.use {
+        val teams = ArrayList<Team>()
+
+        select(TEAM_TABLE)
+            .parseList(object : MapRowParser<List<Team>> {
+                override fun parseRow(columns: Map<String, Any?>): List<Team> {
+                    val team = Team(
+                        strTeam = columns.getValue(TEAM_NAME).toString(),
+                        idTeam = columns.getValue(TEAM_ID).toString(),
+                        strTeamBadge = columns.getValue(TEAM_BADGE).toString(),
+                        strDescriptionEN = columns.getValue(TEAM_DESC).toString(),
+                        strCountry = columns.getValue(TEAM_COUNTRY).toString()
+                    )
+                    teams.add(team)
+                    return teams
+                }
+            })
+
+        teams
+    }
+
+    fun selectTeam(id: String) = db.use {
+        val result = select(TEAM_TABLE)
+            .whereArgs("$TEAM_ID = {idTeam}", "idTeam" to id)
+            .exec { parseList(TeamsParser()) }
+
+        result
+    }
+
+    fun insertTeam(team: Team) = db.use {
+        insert(
+            TEAM_TABLE,
+            TEAM_ID to team.idTeam,
+            TEAM_NAME to team.strTeam,
+            TEAM_COUNTRY to team.strCountry,
+            TEAM_DESC to team.strDescriptionEN,
+            TEAM_BADGE to team.strTeamBadge
+        )
+    }
+
+    fun deleteTeam(team: Team) = db.use {
+        delete(MATCH_TABLE, "$TEAM_ID = {teamId}", "teamId" to team.idTeam)
     }
 
 }

@@ -37,7 +37,7 @@ class TeamFragment : Fragment() {
         repository.listTeam(DetailActivity.league?.idLeague!!)
         repository.team.observe(this, Observer {
             teams = listOf(it[0])
-            recyclerView.adapter = TeamAdapter(this, teams[0].teams) { team ->
+            recyclerView.adapter = TeamAdapter(teams[0].teams) { team ->
                 val intent = Intent(context, TeamActivity::class.java)
                 intent.putExtra(TeamActivity.EXTRA_IDTEAM, team.idTeam)
                 startActivity(intent)

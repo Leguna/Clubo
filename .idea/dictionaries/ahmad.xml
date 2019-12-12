@@ -4,10 +4,25 @@
       <w>anko</w>
       <w>clubo</w>
       <w>countrys</w>
+      <w>eventsnextleague</w>
+      <w>eventspastleague</w>
+      <w>fanart</w>
+      <w>goalsagainst</w>
+      <w>goalsdifference</w>
+      <w>goalsfor</w>
       <w>idmatch</w>
       <w>idteam</w>
+      <w>instagram</w>
+      <w>lookupevent</w>
+      <w>lookupleague</w>
+      <w>lookuptable</w>
+      <w>lookupteam</w>
       <w>photoaway</w>
       <w>photohome</w>
+      <w>prevnext</w>
+      <w>sarandi</w>
+      <w>searchevents</w>
+      <w>teamid</w>
     </words>
   </dictionary>
 </component>

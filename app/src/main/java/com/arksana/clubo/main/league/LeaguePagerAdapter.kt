@@ -1,6 +1,5 @@
 package com.arksana.clubo.main.league
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -10,7 +9,7 @@ private val TAB_TITLES = arrayOf(
     R.string.match, R.string.standings, R.string.team
 )
 
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
+class SectionsPagerAdapter(fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val pages = listOf(

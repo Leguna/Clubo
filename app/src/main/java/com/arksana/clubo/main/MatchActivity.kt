@@ -35,15 +35,15 @@ class MatchActivity : AppCompatActivity() {
 
         showLoading(true)
         repository.team.observe(this, Observer {
-            match.strHomePhoto = it[0].teams!![0]?.strTeamBadge
-            match.strAwayPhoto = it[1].teams!![0]?.strTeamBadge
+            match.strHomePhoto = it[0].teams[0].strTeamBadge
+            match.strAwayPhoto = it[1].teams[0].strTeamBadge
 
             Glide.with(this)
-                .load(it[0].teams!![0]?.strTeamBadge)
+                .load(it[0].teams[0].strTeamBadge)
                 .apply(RequestOptions().override(200, 300))
                 .into(iv_badge)
             Glide.with(this)
-                .load(it[1].teams!![0]?.strTeamBadge)
+                .load(it[1].teams[0].strTeamBadge)
                 .apply(RequestOptions().override(200, 300))
                 .into(iv_badge2)
         })
@@ -100,7 +100,7 @@ class MatchActivity : AppCompatActivity() {
             heartCondition = !heartCondition
             if (heartCondition) {
                 item.setIcon(R.drawable.ic_favorite)
-                ankoSQL.sqlLiteCreate(match)
+                ankoSQL.insertMatch(match)
             } else {
                 item.setIcon(R.drawable.ic_favorite_border)
                 ankoSQL.matchDelete(match)
@@ -112,7 +112,7 @@ class MatchActivity : AppCompatActivity() {
 
     private fun heartCheck(idEvent: String) {
         val menuItem: MenuItem = menu.findItem(R.id.action_favorite)
-        heartCondition = ankoSQL.sqlLiteSelectID(idEvent).isNotEmpty()
+        heartCondition = ankoSQL.matchSelect(idEvent).isNotEmpty()
         val icon = if (heartCondition) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         menuItem.setIcon(icon)
     }

@@ -59,7 +59,6 @@ class StandingAdapter(
         }
     }
 
-    class StandingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    }
+    class StandingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }

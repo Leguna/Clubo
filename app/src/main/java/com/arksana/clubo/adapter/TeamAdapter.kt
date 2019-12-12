@@ -3,7 +3,6 @@ package com.arksana.clubo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.clubo.R
 import com.arksana.clubo.model.Team
@@ -12,14 +11,11 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_team_list.view.*
 
 class TeamAdapter(
-    private val owner: LifecycleOwner,
     private var list: List<Team>?,
     val listener: (Team) -> Unit
 ) : RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
 
-    class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class TeamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         return TeamViewHolder(
