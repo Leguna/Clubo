@@ -29,6 +29,9 @@ interface RetrofitInterface {
     @GET("searchevents.php?")
     fun getSearch(@Query("e") query: String): Call<Matches>
 
+    @GET("searchteams.php?")
+    fun getSearchTeam(@Query("t") query: String): Call<Teams>
+
     @GET("lookup_all_teams.php?")
     fun getTeamList(@Query("id") id: String): Call<Teams>
 

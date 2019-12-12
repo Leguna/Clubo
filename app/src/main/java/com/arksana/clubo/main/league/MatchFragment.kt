@@ -72,7 +72,7 @@ class MatchFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (!newText.isNullOrEmpty()) {
-                    repository.search(newText)
+                    repository.searchMatch(newText)
                     recyclerView3.visible()
                     prevnext.gone()
                 } else {

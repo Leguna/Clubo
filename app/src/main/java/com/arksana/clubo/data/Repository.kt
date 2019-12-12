@@ -104,7 +104,7 @@ open class Repository : ViewModel() {
         })
     }
 
-    fun search(query: String) {
+    fun searchMatch(query: String) {
         EspressoIdlingResource.increment()
         service?.getSearch(query)?.enqueue(object : Callback<Matches> {
             override fun onFailure(call: Call<Matches>, t: Throwable) {
@@ -117,6 +117,24 @@ open class Repository : ViewModel() {
                 if (data?.matches == null) data =
                     Matches(emptyList())
                 matches3.postValue(Matches(data.matches.filter { it.strSport == "Soccer" }))
+                EspressoIdlingResource.decrement()
+            }
+        })
+    }
+
+    fun searchTeam(query: String) {
+        EspressoIdlingResource.increment()
+        service?.getSearchTeam(query)?.enqueue(object : Callback<Teams> {
+            override fun onFailure(call: Call<Teams>, t: Throwable) {
+                println("Fail Search Data.")
+                EspressoIdlingResource.decrement()
+            }
+
+            override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
+                var data = response.body()
+                if (data?.teams == null) data =
+                    Teams(emptyList())
+                team.postValue(arrayListOf(Teams(data.teams.filter { it.strSport == "Soccer" })))
                 EspressoIdlingResource.decrement()
             }
         })

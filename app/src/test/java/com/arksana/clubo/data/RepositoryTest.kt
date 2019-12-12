@@ -75,7 +75,7 @@ class RepositoryTest {
         val observer: Observer<Matches> = mock(Observer::class.java) as Observer<Matches>
 
         `when`(repository.matches).thenReturn(fakeLiveData)
-        repository.search("Japan")
+        repository.searchMatch("Japan")
         repository.matches.observeForever(observer)
         verify(observer).onChanged(GetData.searchEvents())
     }

@@ -52,7 +52,7 @@ class TeamFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (!newText.isNullOrEmpty()) {
-                    repository.search(newText)
+                    repository.searchTeam(newText)
                     return true
                 } else {
                     repository.listTeam(id.toString())

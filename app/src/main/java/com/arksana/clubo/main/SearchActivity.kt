@@ -41,7 +41,7 @@ class SearchActivity : AppCompatActivity() {
             showLoading(false)
         })
 
-        repository.search(intent.getStringExtra(EXTRA_QUERY)!!)
+        repository.searchMatch(intent.getStringExtra(EXTRA_QUERY)!!)
         title = intent.getStringExtra(EXTRA_QUERY)
     }
 
@@ -66,7 +66,7 @@ class SearchActivity : AppCompatActivity() {
                 if (query.isNotEmpty())
                     title = query
                 showLoading(true)
-                repository.search(query)
+                repository.searchMatch(query)
                 return true
             }
 
@@ -74,7 +74,7 @@ class SearchActivity : AppCompatActivity() {
                 if (newText?.isNotEmpty()!!) {
                     showLoading(true)
                     title = newText
-                    repository.search(newText)
+                    repository.searchMatch(newText)
                 }
                 return true
             }
